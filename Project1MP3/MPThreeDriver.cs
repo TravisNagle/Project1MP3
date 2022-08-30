@@ -12,10 +12,60 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////
 
+using System.Security.Cryptography;
+
 public class MPThreeDriver
 {
     public static void Main()
+    { 
+        Console.WriteLine("Hello! Welcome to the MP3 Tracker Program! Here you can download, catalog, and play MP3 music files!");
+
+        string playerName;
+        do
+        {
+            Console.Write("Please enter your name: ");
+            playerName = Console.ReadLine();
+
+        } while (playerName == "");
+
+        Console.WriteLine($"Welcome {playerName}! Please enjoy MP3 Tracker.");
+        Menu();
+    }
+
+    public static void Menu()
     {
-        Console.WriteLine("test");
+        Console.WriteLine("Menu for Project 1 - MP3");
+        Console.WriteLine("------------------------");
+        Console.WriteLine();
+        Console.WriteLine("1. Create a new MP3 file");
+        Console.WriteLine("2. Display an MP3 file");
+        Console.WriteLine("3. End the Program");
+
+        string userChoice = Console.ReadLine();
+
+        while(userChoice != "1" && userChoice != "2" && userChoice != "3");
+        {
+            Console.WriteLine("Menu for Project 1 - MP3");
+            Console.WriteLine("------------------------");
+            Console.WriteLine();
+            Console.WriteLine("1. Create a new MP3 file");
+            Console.WriteLine("2. Display an MP3 file");
+            Console.WriteLine("3. End the Program");
+
+            userChoice = Console.ReadLine();
+        }
+        
+        switch (userChoice)
+        {
+            case "1":
+                Console.WriteLine("One works"); // placeholder line
+                break;
+            case "2":
+                Console.WriteLine("Two works"); // placeholder line
+                break;
+            case "3":
+                Console.WriteLine("Thank you for using MP3 Tracker!");
+                break;
+        }
     }
 }
