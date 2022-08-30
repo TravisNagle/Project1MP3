@@ -3,7 +3,7 @@
 //
 // Project: Project1MP3
 // File Name: MPThreeDriver.cs
-// Description: 
+// Description: Displays a welcome message to the user as well as displays the interactable menu.
 // Course: CSCI 1260-001 – Introduction to Computer Science II
 // Author: Travis Nagle, naglet@etsu.edu, Department of Computing, East Tennessee State University
 // Created: 08/30/2022
