@@ -1,4 +1,18 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////
+//
+// Project: Project1MP3
+// File Name: Genre.cs
+// Description: Creates the MPThree class to allow the user to add their own songs.
+// Course: CSCI 1260-001 – Introduction to Computer Science II
+// Author: Travis Nagle, naglet@etsu.edu, Department of Computing, East Tennessee State University
+// Created: 08/31/2022
+// Copyright: Travis Nagle, 2022
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,7 +71,7 @@ namespace Project1MP3
         {
             string info = "";
             info += $"MP3 Title:        {songTitle}";
-            info += $"\nArtist:           {Artist}";
+            info += $"\nArtist:           {artist}";
             info += $"\nRelease Date:     {songReleaseDate}       Genre:       {genre}";
             info += $"\nDownload Cost:    {downloadCost}             File Size:   {fileSize}";
             info += $"\nSong Playtime:    {playbackTime}             Album Photo: {imagePath}";

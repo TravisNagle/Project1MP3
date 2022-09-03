@@ -55,10 +55,63 @@ public class MPThreeDriver
         switch (int.Parse(userChoice))
         {
             case 1:
-                MPThree newSong = new MPThree();
                 string nameChoice;
                 Console.WriteLine("Song Name: ");
                 nameChoice = Console.ReadLine();
+
+                string artistChoice;
+                Console.WriteLine("Artist Name: ");
+                artistChoice = Console.ReadLine();
+
+                string releaseDateChoice;
+                Console.WriteLine("Release Date: ");
+                releaseDateChoice = Console.ReadLine();
+
+                double playbackTimeChoice;
+                Console.WriteLine("Playback Time: ");
+                playbackTimeChoice = Convert.ToDouble(Console.ReadLine());
+
+                string numberSelect;
+                Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
+                numberSelect = Console.ReadLine();
+                Genre genreChoice = Genre.Other;
+                switch (numberSelect)
+                {
+                    case "1":
+                        genreChoice = Genre.Rock;
+                        break;
+                    case "2":
+                        genreChoice = Genre.Pop;
+                        break;
+                    case "3":
+                        genreChoice = Genre.Jazz;
+                        break;
+                    case "4":
+                        genreChoice = Genre.Country;
+                        break;
+                    case "5":
+                        genreChoice = Genre.Classical;
+                        break;
+                    case "6":
+                        genreChoice = Genre.Other;
+                        break;
+                }
+
+                decimal downloadCostChoice = 1.25m;
+                //Console.WriteLine("Download Cost: ");
+                //downloadCostChoice = Convert.ToDecimal(Console.ReadLine);
+
+                string imagePathChoice;
+                Console.WriteLine("Image Path: ");
+                imagePathChoice = Console.ReadLine();
+
+                double fileSizeChoice;
+                Console.WriteLine("File Size: ");
+                fileSizeChoice = Convert.ToDouble(Console.ReadLine());
+
+                MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, genreChoice, downloadCostChoice, imagePathChoice, fileSizeChoice);
+                Console.WriteLine("Press Enter to see your song");
+                Console.WriteLine(newSong);
                 break;
             case 2:
                 Console.WriteLine("Two works"); // placeholder line
