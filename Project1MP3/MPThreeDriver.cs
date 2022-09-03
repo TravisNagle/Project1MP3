@@ -13,6 +13,7 @@
 //////////
 
 using System.Security.Cryptography;
+using Project1MP3;
 
 public class MPThreeDriver
 {
@@ -34,16 +35,9 @@ public class MPThreeDriver
 
     public static void Menu()
     {
-        Console.WriteLine("Menu for Project 1 - MP3");
-        Console.WriteLine("------------------------");
-        Console.WriteLine();
-        Console.WriteLine("1. Create a new MP3 file");
-        Console.WriteLine("2. Display an MP3 file");
-        Console.WriteLine("3. End the Program");
+        string userChoice;
 
-        string userChoice = Console.ReadLine();
-
-        while(userChoice != "1" && userChoice != "2" && userChoice != "3");
+        do
         {
             Console.WriteLine("Menu for Project 1 - MP3");
             Console.WriteLine("------------------------");
@@ -53,17 +47,23 @@ public class MPThreeDriver
             Console.WriteLine("3. End the Program");
 
             userChoice = Console.ReadLine();
-        }
+            if (int.Parse(userChoice) != 1 && int.Parse(userChoice) != 2 && int.Parse(userChoice) != 3)
+                Console.WriteLine("That was not one of the valid options. Please try again.");
+
+        } while (int.Parse(userChoice) != 1 && int.Parse(userChoice) != 2 && int.Parse(userChoice) != 3);
         
-        switch (userChoice)
+        switch (int.Parse(userChoice))
         {
-            case "1":
-                Console.WriteLine("One works"); // placeholder line
+            case 1:
+                MPThree newSong = new MPThree();
+                string nameChoice;
+                Console.WriteLine("Song Name: ");
+                nameChoice = Console.ReadLine();
                 break;
-            case "2":
+            case 2:
                 Console.WriteLine("Two works"); // placeholder line
                 break;
-            case "3":
+            case 3:
                 Console.WriteLine("Thank you for using MP3 Tracker!");
                 break;
         }
