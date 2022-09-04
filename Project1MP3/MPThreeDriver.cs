@@ -18,25 +18,26 @@ using Project1MP3;
 public class MPThreeDriver
 {
     public static void Main()
-    { 
+    {
+        MPThree defaultSong = new MPThree();
+
         Console.WriteLine("Hello! Welcome to the MP3 Tracker Program! Here you can download, catalog, and play MP3 music files!");
 
-        string playerName;
+        string userName;
         do
         {
             Console.Write("Please enter your name: ");
-            playerName = Console.ReadLine();
+            userName = Console.ReadLine();
 
-        } while (playerName == "");
+        } while (userName == "");
 
-        Console.WriteLine($"Welcome {playerName}! Please enjoy MP3 Tracker.");
-        Menu();
+        Console.WriteLine($"Welcome {userName}! Please enjoy MP3 Tracker.");
+        Menu(userName, defaultSong);
     }
 
-    public static void Menu()
+    public static void Menu(string userName, MPThree newSong)
     {
         string userChoice;
-
         do
         {
             Console.WriteLine("Menu for Project 1 - MP3");
@@ -47,6 +48,7 @@ public class MPThreeDriver
             Console.WriteLine("3. End the Program");
 
             userChoice = Console.ReadLine();
+
             if (int.Parse(userChoice) != 1 && int.Parse(userChoice) != 2 && int.Parse(userChoice) != 3)
                 Console.WriteLine("That was not one of the valid options. Please try again.");
 
@@ -55,70 +57,87 @@ public class MPThreeDriver
         switch (int.Parse(userChoice))
         {
             case 1:
-                string nameChoice;
-                Console.WriteLine("Song Name: ");
-                nameChoice = Console.ReadLine();
-
-                string artistChoice;
-                Console.WriteLine("Artist Name: ");
-                artistChoice = Console.ReadLine();
-
-                string releaseDateChoice;
-                Console.WriteLine("Release Date: ");
-                releaseDateChoice = Console.ReadLine();
-
-                double playbackTimeChoice;
-                Console.WriteLine("Playback Time: ");
-                playbackTimeChoice = Convert.ToDouble(Console.ReadLine());
-
-                string numberSelect;
-                Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
-                numberSelect = Console.ReadLine();
-                Genre genreChoice = Genre.Other;
-                switch (numberSelect)
-                {
-                    case "1":
-                        genreChoice = Genre.Rock;
-                        break;
-                    case "2":
-                        genreChoice = Genre.Pop;
-                        break;
-                    case "3":
-                        genreChoice = Genre.Jazz;
-                        break;
-                    case "4":
-                        genreChoice = Genre.Country;
-                        break;
-                    case "5":
-                        genreChoice = Genre.Classical;
-                        break;
-                    case "6":
-                        genreChoice = Genre.Other;
-                        break;
-                }
-
-                decimal downloadCostChoice = 1.25m;
-                //Console.WriteLine("Download Cost: ");
-                //downloadCostChoice = Convert.ToDecimal(Console.ReadLine);
-
-                string imagePathChoice;
-                Console.WriteLine("Image Path: ");
-                imagePathChoice = Console.ReadLine();
-
-                double fileSizeChoice;
-                Console.WriteLine("File Size: ");
-                fileSizeChoice = Convert.ToDouble(Console.ReadLine());
-
-                MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, genreChoice, downloadCostChoice, imagePathChoice, fileSizeChoice);
-                Console.WriteLine("Press Enter to see your song");
-                Console.WriteLine(newSong);
+                AddSong(userName);
                 break;
             case 2:
-                Console.WriteLine("Two works"); // placeholder line
+                ShowSong(userName, newSong);
                 break;
             case 3:
-                Console.WriteLine("Thank you for using MP3 Tracker!");
+                Console.WriteLine($"Thank you for using MP3 Tracker, {userName}!");
                 break;
+        }
+    }
+
+    public static void AddSong(string userName)
+    {
+        Console.WriteLine("Song Name: ");
+        string nameChoice = Console.ReadLine();
+
+        Console.WriteLine("Artist Name: ");
+        string artistChoice = Console.ReadLine();
+
+        Console.WriteLine("Release Date: ");
+        string releaseDateChoice = Console.ReadLine();
+
+        Console.WriteLine("Playback Time: ");
+        double playbackTimeChoice = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
+        string numberSelect = Console.ReadLine();
+        Genre genreChoice = Genre.Other;
+        switch (numberSelect)
+        {
+            case "1":
+                genreChoice = Genre.Rock;
+                break;
+            case "2":
+                genreChoice = Genre.Pop;
+                break;
+            case "3":
+                genreChoice = Genre.Jazz;
+                break;
+            case "4":
+                genreChoice = Genre.Country;
+                break;
+            case "5":
+                genreChoice = Genre.Classical;
+                break;
+            case "6":
+                genreChoice = Genre.Other;
+                break;
+        }
+
+        Console.WriteLine("Download Cost: ");
+        decimal downloadCostChoice = Convert.ToDecimal(Console.ReadLine()); // Placeholder value
+
+        Console.WriteLine("Image Path: ");
+        string imagePathChoice = Console.ReadLine();
+
+        Console.WriteLine("File Size: ");
+        double fileSizeChoice = Convert.ToDouble(Console.ReadLine());
+
+        MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, genreChoice, downloadCostChoice, imagePathChoice, fileSizeChoice);
+
+        Console.WriteLine("Song Added! Press \"ENTER\" to return to the menu: ");
+        Console.ReadKey();
+        Menu(userName, newSong);
+    }
+
+    public static void ShowSong(string userName, MPThree newSong)
+    {
+        // Checks if user has added a song
+        if (newSong.songTitle == null)
+        {
+            Console.WriteLine($"No menu choice exists. Please use menu choice \"1\" before trying to display an MP3 file.");
+            Menu(userName, newSong);
+        }
+        // Shows user their added song
+        else
+        {
+            Console.WriteLine(newSong);
+            Console.WriteLine($"Press \"ENTER\" to return to the menu.");
+            Console.ReadKey();
+            Menu(userName, newSong);
         }
     }
 }

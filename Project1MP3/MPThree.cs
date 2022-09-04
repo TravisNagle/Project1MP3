@@ -20,27 +20,27 @@ using System.Threading.Tasks;
 
 namespace Project1MP3
 {
-    internal class MPThree
+    public class MPThree
     {
-        private string songTitle;
+        public string songTitle;
         private string artist;
         private string songReleaseDate;
         private double playbackTime;
-        public Genre genre { get; set; }
+        private Genre genre { get; set; }
         private decimal downloadCost;
         private string imagePath;
         private double fileSize;
 
         public MPThree()
         {
-            songTitle = "(Don't Fear) The Reaper";
-            artist = "Blue Oyster Cult";
-            songReleaseDate = "05/21/1976";
-            playbackTime = 5.09d;
-            genre = Genre.Rock;
-            downloadCost = 1.29m;
-            imagePath = $"photos/AgentsOfFortune.jpg";
-            fileSize = 5.4d;
+            songTitle = null;
+            artist = null;
+            songReleaseDate = null;
+            playbackTime = 0.00d;
+            genre = Genre.Other;
+            downloadCost = 0.00m;
+            imagePath = null;
+            fileSize = 0.0d;
         }
 
         public MPThree(MPThree existingSong)
@@ -67,12 +67,13 @@ namespace Project1MP3
             this.fileSize = fileSize;
         }
 
+
         public override string ToString()
         {
             string info = "";
             info += $"MP3 Title:        {songTitle}";
             info += $"\nArtist:           {artist}";
-            info += $"\nRelease Date:     {songReleaseDate}       Genre:       {genre}";
+            info += $"\nRelease Date:     {songReleaseDate}          Genre:       {genre}";
             info += $"\nDownload Cost:    {downloadCost}             File Size:   {fileSize}";
             info += $"\nSong Playtime:    {playbackTime}             Album Photo: {imagePath}";
 
