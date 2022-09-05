@@ -20,6 +20,9 @@ using System.Threading.Tasks;
 
 namespace Project1MP3
 {
+    /// <summary>
+    /// Creates the data type Genre with six different possible values.
+    /// </summary>
     public enum Genre
     {
         Rock,
