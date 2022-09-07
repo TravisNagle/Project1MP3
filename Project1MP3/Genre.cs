@@ -22,14 +22,15 @@ namespace Project1MP3
 {
     /// <summary>
     /// Creates the data type Genre with six different possible values.
+    /// Assigned number values for user accessibility.
     /// </summary>
     public enum Genre
     {
-        Rock,
-        Pop,
-        Jazz,
-        Country,
-        Classical,
-        Other
+        Rock = 1,
+        Pop = 2,
+        Jazz = 3,
+        Country = 4,
+        Classical = 5,
+        Other = 6
     }
 }

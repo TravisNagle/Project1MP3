@@ -80,7 +80,7 @@ public class MPThreeDriver
                 AddSong(userName);
                 break;
             case 2:
-                ShowSong(userName, newSong);
+                DisplaySong(userName, newSong);
                 break;
             case 3:
                 Console.WriteLine($"Thank you for using MP3 Tracker, {userName}!");
@@ -108,33 +108,11 @@ public class MPThreeDriver
         double playbackTimeChoice = Convert.ToDouble(Console.ReadLine());
 
         Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
-        string numberSelect = Console.ReadLine();
-        Genre genreChoice = Genre.Other;
-        //Checks for which option the user has picked and assigns the MPThree object that genre value.
-        switch (numberSelect)
-        {
-            case "1":
-                genreChoice = Genre.Rock;
-                break;
-            case "2":
-                genreChoice = Genre.Pop;
-                break;
-            case "3":
-                genreChoice = Genre.Jazz;
-                break;
-            case "4":
-                genreChoice = Genre.Country;
-                break;
-            case "5":
-                genreChoice = Genre.Classical;
-                break;
-            case "6":
-                genreChoice = Genre.Other;
-                break;
-        }
+        string genreChoice = Console.ReadLine();
+        Genre userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
 
         Console.WriteLine("Download Cost: ");
-        decimal downloadCostChoice = Convert.ToDecimal(Console.ReadLine()); // Placeholder value
+        decimal downloadCostChoice = Convert.ToDecimal(Console.ReadLine()); 
 
         Console.WriteLine("Image Path: ");
         string imagePathChoice = Console.ReadLine();
@@ -143,7 +121,7 @@ public class MPThreeDriver
         double fileSizeChoice = Convert.ToDouble(Console.ReadLine());
 
         //Creates the new song based on user specifications.
-        MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, genreChoice, downloadCostChoice, imagePathChoice, fileSizeChoice);
+        MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
         Console.WriteLine("Song Added! Press \"ENTER\" to return to the menu: ");
         Console.ReadKey();
@@ -158,7 +136,7 @@ public class MPThreeDriver
     /// </summary>
     /// <param name="userName">Takes the username and saves it for the menu.</param>
     /// <param name="newSong">Takes the new song and displays it.</param>
-    public static void ShowSong(string userName, MPThree newSong)
+    public static void DisplaySong(string userName, MPThree newSong)
     {
         // Checks if user has added a song
         if (newSong.songTitle == null)

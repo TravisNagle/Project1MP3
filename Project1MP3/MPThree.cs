@@ -26,17 +26,17 @@ namespace Project1MP3
     /// </summary>
     public class MPThree
     {
-        public string songTitle;
-        private string artist;
-        private string songReleaseDate;
-        private double playbackTime;
+        public string songTitle { get; set; }
+        private string artist { get; set; }
+        private string songReleaseDate { get; set; }
+        private double playbackTime { get; set; }
         private Genre genre { get; set; }
-        private decimal downloadCost;
-        private string imagePath;
-        private double fileSize;
+        private decimal downloadCost { get; set; }
+        private string imagePath { get; set; }
+        private double fileSize { get; set; }
 
         /// <summary>
-        /// Default MPThree constructor with most values set to null for verification purposes.
+        /// Default MPThree constructor with all default values.
         /// </summary>
         public MPThree()
         {
@@ -91,7 +91,7 @@ namespace Project1MP3
         }
 
         /// <summary>
-        /// MPThree ToString constructor to display object info to the console.
+        /// MPThree ToString method to display object info to the console.
         /// </summary>
         /// <returns>The MPThree object's values as an organized string.</returns>
         public override string ToString()
@@ -105,7 +105,5 @@ namespace Project1MP3
 
             return info;
         }
-
-
     }
 }
