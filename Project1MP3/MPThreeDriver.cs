@@ -139,7 +139,7 @@ public class MPThreeDriver
     public static void DisplaySong(string userName, MPThree newSong)
     {
         // Checks if user has added a song
-        if (newSong.songTitle == null)
+        if (newSong.SongTitle == null)
         {
             Console.WriteLine($"No menu choice exists. Please use menu choice \"1\" before trying to display an MP3 file.");
             //Returns user to the menu

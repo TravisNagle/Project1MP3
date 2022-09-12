@@ -26,28 +26,28 @@ namespace Project1MP3
     /// </summary>
     public class MPThree
     {
-        public string songTitle { get; set; }
-        private string artist { get; set; }
-        private string songReleaseDate { get; set; }
-        private double playbackTime { get; set; }
-        private Genre genre { get; set; }
-        private decimal downloadCost { get; set; }
-        private string imagePath { get; set; }
-        private double fileSize { get; set; }
+        public string SongTitle { get; set; }
+        private string Artist { get; set; }
+        private string SongReleaseDate { get; set; }
+        private double PlaybackTime { get; set; }
+        private Genre Genre { get; set; }
+        private decimal DownloadCost { get; set; }
+        private string ImagePath { get; set; }
+        private double FileSize { get; set; }
 
         /// <summary>
         /// Default MPThree constructor with all default values.
         /// </summary>
         public MPThree()
         {
-            songTitle = null;
-            artist = null;
-            songReleaseDate = null;
-            playbackTime = 0.00d;
-            genre = Genre.Other;
-            downloadCost = 0.00m;
-            imagePath = null;
-            fileSize = 0.0d;
+            SongTitle = null;
+            Artist = null;
+            SongReleaseDate = null;
+            PlaybackTime = 0.00d;
+            Genre = Genre.Other;
+            DownloadCost = 0.00m;
+            ImagePath = null;
+            FileSize = 0.0d;
         }
 
         /// <summary>
@@ -56,38 +56,38 @@ namespace Project1MP3
         /// <param name="existingSong">An existing song the user has created.</param>
         public MPThree(MPThree existingSong)
         {
-            songTitle = existingSong.songTitle;
-            artist = existingSong.artist;
-            songReleaseDate = existingSong.songReleaseDate; 
-            playbackTime = existingSong.playbackTime; 
-            genre = existingSong.genre;
-            downloadCost = existingSong.downloadCost;
-            imagePath = existingSong.imagePath;
-            fileSize = existingSong.fileSize;
+            SongTitle = existingSong.SongTitle;
+            Artist = existingSong.Artist;
+            SongReleaseDate = existingSong.SongReleaseDate; 
+            PlaybackTime = existingSong.PlaybackTime; 
+            Genre = existingSong.Genre;
+            DownloadCost = existingSong.DownloadCost;
+            ImagePath = existingSong.ImagePath;
+            FileSize = existingSong.FileSize;
         }
 
         /// <summary>
         /// Parameterized Constructor that creates a new MPThree object given certain input
         /// values.
         /// </summary>
-        /// <param name="songTitle">MPThree object's song name value</param>
-        /// <param name="artist">MPThree object's artist name value</param>
-        /// <param name="songReleaseDate">MPThree object's release date value</param>
-        /// <param name="playbackTime">MPThree object's playback time value</param>
-        /// <param name="genre">MPThree object's genre enum value</param>
-        /// <param name="downloadCost">MPThree object's download cost value</param>
-        /// <param name="imagePath">MPThree object's image path value as a string</param>
-        /// <param name="fileSize">MPThree object's file size value</param>
-        public MPThree(string songTitle, string artist, string songReleaseDate, double playbackTime, Genre genre, decimal downloadCost, string imagePath, double fileSize)
+        /// <param name="SongTitle">MPThree object's song name value</param>
+        /// <param name="Artist">MPThree object's artist name value</param>
+        /// <param name="SongReleaseDate">MPThree object's release date value</param>
+        /// <param name="PlaybackTime">MPThree object's playback time value</param>
+        /// <param name="Genre">MPThree object's genre enum value</param>
+        /// <param name="DownloadCost">MPThree object's download cost value</param>
+        /// <param name="ImagePath">MPThree object's image path value as a string</param>
+        /// <param name="FileSize">MPThree object's file size value</param>
+        public MPThree(string SongTitle, string Artist, string SongReleaseDate, double PlaybackTime, Genre Genre, decimal DownloadCost, string ImagePath, double FileSize)
         {
-            this.songTitle = songTitle;
-            this.artist = artist;
-            this.songReleaseDate = songReleaseDate;
-            this.playbackTime = playbackTime;
-            this.genre = genre;
-            this.downloadCost = downloadCost;
-            this.imagePath = imagePath;
-            this.fileSize = fileSize;
+            this.SongTitle = SongTitle;
+            this.Artist = Artist;
+            this.SongReleaseDate = SongReleaseDate;
+            this.PlaybackTime = PlaybackTime;
+            this.Genre = Genre;
+            this.DownloadCost = DownloadCost;
+            this.ImagePath = ImagePath;
+            this.FileSize = FileSize;
         }
 
         /// <summary>
@@ -97,11 +97,11 @@ namespace Project1MP3
         public override string ToString()
         {
             string info = "";
-            info += $"MP3 Title:        {songTitle}";
-            info += $"\nArtist:           {artist}";
-            info += $"\nRelease Date:     {songReleaseDate}       Genre:       {genre}";
-            info += $"\nDownload Cost:    {downloadCost}             File Size:   {fileSize} MBs";
-            info += $"\nSong Playtime:    {playbackTime} minutes      Album Photo: {imagePath}";
+            info += $"MP3 Title:        {SongTitle}";
+            info += $"\nArtist:           {Artist}";
+            info += $"\nRelease Date:     {SongReleaseDate}       Genre:       {Genre}";
+            info += $"\nDownload Cost:    {DownloadCost}             File Size:   {FileSize} MBs";
+            info += $"\nSong Playtime:    {PlaybackTime} minutes      Album Photo: {ImagePath}";
 
             return info;
         }
