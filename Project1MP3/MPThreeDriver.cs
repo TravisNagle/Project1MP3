@@ -95,30 +95,59 @@ public class MPThreeDriver
     /// <param name="userName">Takes the username value from Main and continues to save it.</param>
     public static void AddSong(string userName)
     {
-        Console.WriteLine("Song Name: ");
-        string nameChoice = Console.ReadLine();
+        string nameChoice;
+        do
+        {
+            Console.WriteLine("Song Name: ");
+            nameChoice = Console.ReadLine();
+        } while (nameChoice == "");
 
-        Console.WriteLine("Artist Name: ");
-        string artistChoice = Console.ReadLine();
+        string artistChoice;
+        do
+        {
+            Console.WriteLine("Artist Name: ");
+            artistChoice = Console.ReadLine();
+        } while (artistChoice == "");
 
-        Console.WriteLine("Release Date: ");
-        string releaseDateChoice = Console.ReadLine();
+        string releaseDateChoice;
+        do
+        {
+            Console.WriteLine("Release Date: ");
+            releaseDateChoice = Console.ReadLine();
+        } while (releaseDateChoice == "");
 
-        Console.WriteLine("Playback Time: ");
-        double playbackTimeChoice = Convert.ToDouble(Console.ReadLine());
+        double playbackTimeChoice;
+        do
+        {
+            Console.WriteLine("Playback Time: ");
+            playbackTimeChoice = double.Parse(Console.ReadLine());
+        } while (playbackTimeChoice < 0);
 
+        Genre userGenre;
         Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
         string genreChoice = Console.ReadLine();
-        Genre userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
+        userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
 
-        Console.WriteLine("Download Cost: ");
-        decimal downloadCostChoice = Convert.ToDecimal(Console.ReadLine()); 
+        decimal downloadCostChoice;
+        do
+        {
+            Console.WriteLine("Download Cost: ");
+            downloadCostChoice = decimal.Parse(Console.ReadLine());
+        } while (downloadCostChoice < 0);
 
-        Console.WriteLine("Image Path: ");
-        string imagePathChoice = Console.ReadLine();
+        string imagePathChoice;
+        do
+        {
+            Console.WriteLine("Image Path: ");
+            imagePathChoice = Console.ReadLine();
+        } while (imagePathChoice == "");
 
-        Console.WriteLine("File Size: ");
-        double fileSizeChoice = Convert.ToDouble(Console.ReadLine());
+        double fileSizeChoice;
+        do
+        {
+            Console.WriteLine("File Size: ");
+            fileSizeChoice = double.Parse(Console.ReadLine());
+        } while (fileSizeChoice < 0);
 
         //Creates the new song based on user specifications.
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
