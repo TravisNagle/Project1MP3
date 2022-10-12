@@ -27,23 +27,8 @@ public class MPThreeDriver
     /// </summary>
     public static void Main()
     {
-        //Creates a default song to verify the user has created a new song
-        MPThree defaultSong = new MPThree();
-
-        Console.WriteLine("Hello! Welcome to the MP3 Tracker Program! Here you can download, catalog, and play MP3 music files!");
-
-        string userName;
-        //Checks if the user has entered any string for the username
-        do
-        {
-            Console.Write("Please enter your name: ");
-            userName = Console.ReadLine();
-
-        } while (userName == "");
-
-        Console.WriteLine($"Welcome {userName}! Please enjoy MP3 Tracker.");
-        //Takes user to the menu
-        Menu(userName, defaultSong);
+        Playlist playlist = new Playlist();
+        Console.WriteLine(playlist);
     }
 
     /// <summary>
