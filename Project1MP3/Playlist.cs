@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Project1MP3
 {
+    /// <summary>
+    /// Implementation of the Playlist class that creates a list of MP3 songs and displays
+    /// the name, creator, and creation date of the playlist.
+    /// </summary>
     public class Playlist
     {
         private List<MPThree> PlaylistSongs { get; set; }
@@ -13,6 +17,10 @@ namespace Project1MP3
         private string PlaylistCreator { get; set; }
         private string CreationDate { get; set; }
 
+        /// <summary>
+        /// Default constructor for the Playlist class that uses the default MPThree constructor
+        /// to create a default song while also displaying empty string values for the other attributes.
+        /// </summary>
         public Playlist()
         {
             PlaylistSongs = new List<MPThree>();
@@ -40,9 +48,9 @@ namespace Project1MP3
             return PlaylistSongs;
         }
 
-        public void SetPlaylist(List<MPThree> playlist)
+        public void SetSong(MPThree song)
         {
-            PlaylistSongs = playlist;
+            PlaylistSongs.Add(song);
         }
 
         public override string ToString()
