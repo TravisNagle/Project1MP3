@@ -1,4 +1,19 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////
+//
+// Project: Project3MP3Tracker
+// File Name: Playlist.cs
+// Description: Implements a Playlist class that keeps track of multiple songs the user 
+// has created
+// Course: CSCI 1260-001 – Introduction to Computer Science II
+// Author: Travis Nagle, naglet@etsu.edu, Department of Computing, East Tennessee State University
+// Created: 10/12/2022
+// Copyright: Travis Nagle, 2022
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +45,15 @@ namespace Project1MP3
             CreationDate = "";
         }
 
+        /// <summary>
+        /// Parameterized constructor for the Playlist class that takes an input for
+        /// each of the attributes within the Playlist class and creates a new playlist
+        /// object.
+        /// </summary>
+        /// <param name="playlistSongs">List of playlist songs</param>
+        /// <param name="playlistName">Name of the created playlist</param>
+        /// <param name="playlistCreator">Name of the user that created the playlist</param>
+        /// <param name="creationDate">Date the playlist was created</param>
         public Playlist(List<MPThree> playlistSongs, string playlistName, string playlistCreator, string creationDate)
         {
             PlaylistSongs = playlistSongs;
@@ -38,9 +62,17 @@ namespace Project1MP3
             CreationDate = creationDate;
         }
 
+        /// <summary>
+        /// Copy constructor for the playlist class that copies an existing playlist
+        /// object and copies it to a new object.
+        /// </summary>
+        /// <param name="existingPlaylist">Previously created playlist</param>
         public Playlist(Playlist existingPlaylist)
         {
-
+            PlaylistSongs = existingPlaylist.PlaylistSongs;
+            PlaylistName = existingPlaylist.PlaylistName;
+            PlaylistCreator = existingPlaylist.PlaylistCreator;
+            CreationDate = existingPlaylist.CreationDate;
         }
 
         public List<MPThree> GetPlaylist()
@@ -51,6 +83,32 @@ namespace Project1MP3
         public void SetSong(MPThree song)
         {
             PlaylistSongs.Add(song);
+        }
+
+        public void RemoveSong(MPThree song)
+        {
+            PlaylistSongs.Remove(song);
+        }
+
+        public int PlaylistSize(List<MPThree> playlist)
+        {
+            return playlist.Count;
+        }
+
+        public MPThree EditSong(MPThree song)
+        {
+            Console.WriteLine("-------EDIT SONG-------");
+
+            song.SongTitle = Console.ReadLine();
+            song.Artist = Console.ReadLine();
+            song.SongReleaseDate = Console.ReadLine();
+            song.PlaybackTime = double.Parse(Console.ReadLine());
+            song.Genre = (Genre)Enum.Parse(typeof(Genre), Console.ReadLine());
+            song.DownloadCost = decimal.Parse(Console.ReadLine());
+            song.ImagePath = Console.ReadLine();
+            song.FileSize = double.Parse(Console.ReadLine());
+
+            return song;
         }
 
         public override string ToString()

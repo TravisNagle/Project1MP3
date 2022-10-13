@@ -27,17 +27,9 @@ public class MPThreeDriver
     /// </summary>
     public static void Main()
     {
-        Playlist playlist = new Playlist();
-        Console.WriteLine(playlist);
+        MPThree song = new MPThree();
         string username = "Gamer";
-
-        MPThree newSong = new MPThree();
-
-        Console.WriteLine();
-
-        newSong = AddSong(username);
-        playlist.SetSong(newSong);
-        Console.WriteLine(playlist);
+        Menu(username, song);
 
         /*
         //Creates a default song to verify the user has created a new song
@@ -72,20 +64,29 @@ public class MPThreeDriver
         //Displays the menu options while the user has not entered 1, 2, or 3.
         do
         {
-            Console.WriteLine("Menu for Project 1 - MP3");
+            Console.WriteLine("Menu for Project 3 - MP3 Tracker");
             Console.WriteLine("------------------------");
             Console.WriteLine();
-            Console.WriteLine("1. Create a new MP3 file");
-            Console.WriteLine("2. Display an MP3 file");
-            Console.WriteLine("3. End the Program");
+            Console.WriteLine("1. Create a new playlist");
+            Console.WriteLine("2. Create a new MP3");
+            Console.WriteLine("3. Edit an MP3");
+            Console.WriteLine("4. Remove an MP3");
+            Console.WriteLine("5. Display playlist");
+            Console.WriteLine("6. Search by song name");
+            Console.WriteLine("7. Search by genre");
+            Console.WriteLine("8. Search by artist");
+            Console.WriteLine("9. Sort songs by title");
+            Console.WriteLine("10. Sort by release date");
+            Console.WriteLine("11. Exit");
+
 
             userChoice = Console.ReadLine();
 
             //Checks if the user has chosen a one of the provided options
-            if (int.Parse(userChoice) != 1 && int.Parse(userChoice) != 2 && int.Parse(userChoice) != 3)
+            if (!(int.Parse(userChoice) > 0 && int.Parse(userChoice) < 12))
                 Console.WriteLine("That was not one of the valid options. Please try again.");
 
-        } while (int.Parse(userChoice) != 1 && int.Parse(userChoice) != 2 && int.Parse(userChoice) != 3);
+        } while (!(int.Parse(userChoice) > 0 && int.Parse(userChoice) < 12));
         
         //Checks for which menu option the user has chosen and directs them through that route.
         switch (int.Parse(userChoice))
@@ -97,7 +98,26 @@ public class MPThreeDriver
                 DisplaySong(userName, newSong);
                 break;
             case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
                 Console.WriteLine($"Thank you for using MP3 Tracker, {userName}!");
+                break;
+            default:
+                Console.WriteLine("That was not one of the valid options, please try again.");
                 break;
         }
     }

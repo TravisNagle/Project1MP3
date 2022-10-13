@@ -27,13 +27,13 @@ namespace Project1MP3
     public class MPThree
     {
         public string SongTitle { get; set; }
-        private string Artist { get; set; }
-        private string SongReleaseDate { get; set; }
-        private double PlaybackTime { get; set; }
-        private Genre Genre { get; set; }
-        private decimal DownloadCost { get; set; }
-        private string ImagePath { get; set; }
-        private double FileSize { get; set; }
+        public string Artist { get; set; }
+        public string SongReleaseDate { get; set; }
+        public double PlaybackTime { get; set; }
+        public Genre Genre { get; set; }
+        public decimal DownloadCost { get; set; }
+        public string ImagePath { get; set; }
+        public double FileSize { get; set; }
 
         /// <summary>
         /// Default MPThree constructor with all default values.
@@ -99,9 +99,9 @@ namespace Project1MP3
             string info = "";
             info += $"MP3 Title:        {SongTitle}";
             info += $"\nArtist:           {Artist}";
-            info += $"\nRelease Date:     {SongReleaseDate}       Genre:       {Genre}";
+            info += $"\nRelease Date:     {SongReleaseDate}          Genre:       {Genre}";
             info += $"\nDownload Cost:    {DownloadCost}             File Size:   {FileSize} MBs";
-            info += $"\nSong Playtime:    {PlaybackTime} minutes      Album Photo: {ImagePath}";
+            info += $"\nSong Playtime:    {PlaybackTime} minutes     Album Photo: {ImagePath}";
 
             return info;
         }
