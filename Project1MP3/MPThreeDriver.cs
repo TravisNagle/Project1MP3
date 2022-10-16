@@ -110,10 +110,14 @@ public class MPThreeDriver
                 DisplayPlaylist(username, playlist);
                 break;
             case 6:
+                SearchName(username, playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 7:
                 break;
             case 8:
+                SearchArtist(username, playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 9:
                 break;
@@ -224,31 +228,7 @@ public class MPThreeDriver
         //Creates the new song based on user specifications.
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
-        Console.WriteLine("Song Created!");
-
-        string userChoice = "";
-        Console.Write("Add song to playlist? (Y/N): ");
-        userChoice = Console.ReadLine();
-
-        do
-        {
-            Console.WriteLine($"{userChoice} is not a valid option. Please try again.");
-            Console.Write("Add song to playlist? (Y/N): ");
-            userChoice = Console.ReadLine();
-
-            if (userChoice.ToUpper() == "Y")
-            {
-                playlist.SetSong(newSong);
-                Console.WriteLine("Song Added! Press \"ENTER\" to return to the menu");
-                Console.ReadKey();
-            }
-            else if (userChoice.ToUpper() == "N")
-            {
-                Console.WriteLine($"Song was not added to playlist. Press \\\"ENTER\\\" to return to the menu");
-            }
-        }
-        while (!(userChoice.ToUpper() == "Y" || userChoice.ToUpper() == "N"));
-
+        Console.WriteLine($"Song Created!\n");
         return newSong;
     }
 
@@ -259,19 +239,38 @@ public class MPThreeDriver
         songChoice = int.Parse(Console.ReadLine());
     }
 
+    /// <summary>
+    /// Displays the playlist to the console
+    /// </summary>
+    /// <param name="username">user entered name</param>
+    /// <param name="playlist">created playlist object</param>
     public static void DisplayPlaylist(string username, Playlist playlist)
     {
         Console.WriteLine("-------DISPLAYING PLAYLIST-------");
         Console.WriteLine(playlist);
     }
 
-    public static void SearchSong(string username, Playlist playlist)
+    /// <summary>
+    /// Searches the playlist for the song that contains the name of the song the user enters.
+    /// </summary>
+    /// <param name="username">user entered name</param>
+    /// <param name="playlist">created playlist object</param>
+    public static void SearchName(string username, Playlist playlist)
     {
-        string searchedSong = "";
+        string searchedSongName = "";
         Console.Write("Enter the song you are looking for: ");
-        searchedSong = Console.ReadLine();
-        
-        playlist.SearchSong(
+        searchedSongName = Console.ReadLine();
+
+        playlist.SearchSongName(playlist, searchedSongName);
+    }
+
+    public static void SearchArtist(string username, Playlist playlist)
+    {
+        string searchedArtistName = "";
+        Console.Write("Enter the artist you are looking for: ");
+        searchedArtistName = Console.ReadLine();
+
+        playlist.SearchArtistName(playlist, searchedArtistName);
     }
 
     /// <summary>

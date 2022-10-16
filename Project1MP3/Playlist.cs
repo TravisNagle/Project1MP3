@@ -114,23 +114,8 @@ namespace Project1MP3
             return song;
         }
 
-        public void SearchSong(Playlist playlist, string songName, MPThree song)
+        public void SearchSongName(Playlist playlist, string songName)
         {
-            if (playlist.PlaylistSongs.Contains(song))
-            {
-                if (song.SongTitle == songName)
-                {
-                    Console.WriteLine(song);
-                }
-                else
-                {
-                    Console.WriteLine("Song could not be found");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"{songName} is not contained in this playlist");
-            }
 
             for(int i = 0; i < playlist.PlaylistSongs.Count; i++)
             {
@@ -138,10 +123,28 @@ namespace Project1MP3
                 {
                     Console.WriteLine("Here is the song you are looking for:");
                     Console.WriteLine(playlist.PlaylistSongs[i]);
-                    break;
+                    Console.WriteLine();
+                    break; 
+                }
+                else
+                {
+                    Console.WriteLine($"The song {songName} could not be found in this playlist");
+                    Console.WriteLine();
                 }
             }
+        }
 
+        public void SearchArtistName(Playlist playlist, string artistName)
+        {
+            List<MPThree> searchedPlaylist = new List<MPThree>();
+
+            for(int i = 0; i < playlist.PlaylistSongs.Count; i++)
+            {
+                if (playlist.PlaylistSongs[i].Artist == artistName)
+                {
+                    searchedPlaylist.Add(playlist.PlaylistSongs[i]);
+                }
+            }
         }
 
         public override string ToString()
