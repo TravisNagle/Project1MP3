@@ -90,16 +90,19 @@ namespace Project1MP3
             PlaylistSongs.Remove(song);
         }
 
-        public int PlaylistSize(List<MPThree> playlist)
+        public int PlaylistSize(Playlist playlist)
         {
-            return playlist.Count;
+            int size = playlist.PlaylistSongs.Count;
+            return size;
         }
 
         public MPThree EditSong(MPThree song)
         {
             Console.WriteLine("-------EDIT SONG-------");
 
+            Console.Write("Song Title: ");
             song.SongTitle = Console.ReadLine();
+            Console.Write("Artist Name: ");
             song.Artist = Console.ReadLine();
             song.SongReleaseDate = Console.ReadLine();
             song.PlaybackTime = double.Parse(Console.ReadLine());
@@ -109,6 +112,36 @@ namespace Project1MP3
             song.FileSize = double.Parse(Console.ReadLine());
 
             return song;
+        }
+
+        public void SearchSong(Playlist playlist, string songName, MPThree song)
+        {
+            if (playlist.PlaylistSongs.Contains(song))
+            {
+                if (song.SongTitle == songName)
+                {
+                    Console.WriteLine(song);
+                }
+                else
+                {
+                    Console.WriteLine("Song could not be found");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{songName} is not contained in this playlist");
+            }
+
+            for(int i = 0; i < playlist.PlaylistSongs.Count; i++)
+            {
+                if (playlist.PlaylistSongs[i].SongTitle == songName)
+                {
+                    Console.WriteLine("Here is the song you are looking for:");
+                    Console.WriteLine(playlist.PlaylistSongs[i]);
+                    break;
+                }
+            }
+
         }
 
         public override string ToString()

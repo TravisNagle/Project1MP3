@@ -29,9 +29,10 @@ public class MPThreeDriver
     public static void Main()
     {
         MPThree song = new MPThree();
+        Playlist playlist = new Playlist();
         //Playlist playlist = new Playlist();
         string username = "Gamer";
-        Menu(username, song);
+        Menu(username, song, playlist);
 
         /*
         //Creates a default song to verify the user has created a new song
@@ -60,7 +61,7 @@ public class MPThreeDriver
     /// </summary>
     /// <param name="userName">Takes username value to save it for menu option 3.</param>
     /// <param name="newSong">Takes a new song value to store.</param>
-    public static void Menu(string username, MPThree newSong)
+    public static void Menu(string username, MPThree newSong, Playlist playlist)
     {
         string userChoice;
         //Displays the menu options while the user has not entered 1, 2, or 3.
@@ -94,19 +95,19 @@ public class MPThreeDriver
         switch (int.Parse(userChoice))
         {
             case 1:
-                Playlist playlist = CreatePlaylist(username);
-                Menu(username, newSong);
+                playlist = CreatePlaylist(username);
+                Menu(username, newSong, playlist);
                 break;
             case 2:
-                AddSong(username);
-                Menu(username, newSong);
+                AddSong(username, playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 3:
                 break;
             case 4:
                 break;
             case 5:
-                DisplaySong(username, newSong);
+                DisplayPlaylist(username, playlist);
                 break;
             case 6:
                 break;
@@ -117,6 +118,7 @@ public class MPThreeDriver
             case 9:
                 break;
             case 10:
+                DisplaySong(username, newSong, playlist);
                 break;
             case 11:
                 Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
@@ -148,7 +150,7 @@ public class MPThreeDriver
             if (userChoice == "-1")
                 break;
 
-            MPThree song = AddSong(username);
+            MPThree song = AddSong(username, playlist);
             playlist.SetSong(song);
         } while (userChoice != "-1");
 
@@ -163,7 +165,7 @@ public class MPThreeDriver
     /// MPThree objects attributes.
     /// </summary>
     /// <param name="userName">Takes the username value from Main and continues to save it.</param>
-    public static MPThree AddSong(string userName)
+    public static MPThree AddSong(string userName, Playlist playlist)
     {
         string nameChoice;
         do
@@ -222,10 +224,54 @@ public class MPThreeDriver
         //Creates the new song based on user specifications.
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
-        Console.WriteLine("Song Added! Press \"ENTER\" to return to the menu: ");
-        Console.ReadKey();
+        Console.WriteLine("Song Created!");
+
+        string userChoice = "";
+        Console.Write("Add song to playlist? (Y/N): ");
+        userChoice = Console.ReadLine();
+
+        do
+        {
+            Console.WriteLine($"{userChoice} is not a valid option. Please try again.");
+            Console.Write("Add song to playlist? (Y/N): ");
+            userChoice = Console.ReadLine();
+
+            if (userChoice.ToUpper() == "Y")
+            {
+                playlist.SetSong(newSong);
+                Console.WriteLine("Song Added! Press \"ENTER\" to return to the menu");
+                Console.ReadKey();
+            }
+            else if (userChoice.ToUpper() == "N")
+            {
+                Console.WriteLine($"Song was not added to playlist. Press \\\"ENTER\\\" to return to the menu");
+            }
+        }
+        while (!(userChoice.ToUpper() == "Y" || userChoice.ToUpper() == "N"));
 
         return newSong;
+    }
+
+    public static void EditSong(string username, Playlist playlist)
+    {
+        int songChoice = -1;
+        Console.Write($"Which song would you like to edit: ");
+        songChoice = int.Parse(Console.ReadLine());
+    }
+
+    public static void DisplayPlaylist(string username, Playlist playlist)
+    {
+        Console.WriteLine("-------DISPLAYING PLAYLIST-------");
+        Console.WriteLine(playlist);
+    }
+
+    public static void SearchSong(string username, Playlist playlist)
+    {
+        string searchedSong = "";
+        Console.Write("Enter the song you are looking for: ");
+        searchedSong = Console.ReadLine();
+        
+        playlist.SearchSong(
     }
 
     /// <summary>
@@ -235,14 +281,14 @@ public class MPThreeDriver
     /// </summary>
     /// <param name="userName">Takes the username and saves it for the menu.</param>
     /// <param name="newSong">Takes the new song and displays it.</param>
-    public static void DisplaySong(string userName, MPThree newSong)
+    public static void DisplaySong(string userName, MPThree newSong, Playlist playlist)
     {
         // Checks if user has added a song
         if (newSong.SongTitle == null)
         {
             Console.WriteLine($"No menu choice exists. Please use menu choice \"1\" before trying to display an MP3 file.");
             //Returns user to the menu
-            Menu(userName, newSong);
+            Menu(userName, newSong, playlist);
         }
         // Shows user their added song
         else
@@ -251,7 +297,7 @@ public class MPThreeDriver
             Console.WriteLine($"Press \"ENTER\" to return to the menu.");
             Console.ReadKey();
             //Returns user to the menu
-            Menu(userName, newSong);
+            Menu(userName, newSong, playlist);
         }
     }
 }
