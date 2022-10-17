@@ -76,8 +76,8 @@ public class MPThreeDriver
             Console.WriteLine("4. Remove an MP3");
             Console.WriteLine("5. Display playlist"); //done
             Console.WriteLine("6. Search by song name"); //done
-            Console.WriteLine("7. Search by genre");
-            Console.WriteLine("8. Search by artist");
+            Console.WriteLine("7. Search by genre"); //done
+            Console.WriteLine("8. Search by artist"); //done
             Console.WriteLine("9. Sort songs by title");
             Console.WriteLine("10. Sort by release date");
             Console.WriteLine("11. Exit"); //done
@@ -115,6 +115,8 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 7:
+                SearchGenre(username, playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 8:
                 SearchArtist(username, playlist);
@@ -316,9 +318,33 @@ public class MPThreeDriver
         playlist.SearchSongName(playlist, searchedSongName);
     }
 
+    /// <summary>
+    /// Searches the playlist for the song that contains the name of the genre the user
+    /// is searching for
+    /// </summary>
+    /// <param name="username">user entered name</param>
+    /// <param name="playlist">created playlist object</param>
     public static void SearchGenre(string username, Playlist playlist)
     {
-
+        string searchedGenre = "";
+        Genre userGenre = Genre.Other;
+        searchedGenre = Console.ReadLine();
+        bool valid = false;
+        while (!valid)
+        {
+            try
+            {
+                Console.Write("Enter the genre you are looking for: ");
+                searchedGenre = Console.ReadLine();
+                userGenre = (Genre)Enum.Parse(typeof(Genre), searchedGenre);
+                valid = true;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine("You have chosen an invalid option, please try again.");
+            }
+        }
+        playlist.SearchGenre(playlist, userGenre);
     }
 
     /// <summary>
