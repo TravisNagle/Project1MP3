@@ -114,30 +114,63 @@ namespace Project1MP3
             return song;
         }
 
+        /// <summary>
+        /// Searches for songs in the playlist via the user's entered song name
+        /// </summary>
+        /// <param name="playlist">the created playlist</param>
+        /// <param name="songName">the name of the song the user is searching for</param>
         public void SearchSongName(Playlist playlist, string songName)
         {
 
-            for(int i = 0; i < playlist.PlaylistSongs.Count; i++)
+            List<MPThree> searchedPlaylist = new List<MPThree>();
+
+            Console.WriteLine("-------SONGS FOUND-------");
+            Console.WriteLine();
+            for (int i = 0; i < playlist.PlaylistSongs.Count; i++)
             {
                 if (playlist.PlaylistSongs[i].SongTitle == songName)
                 {
-                    Console.WriteLine("Here is the song you are looking for:");
-                    Console.WriteLine(playlist.PlaylistSongs[i]);
-                    Console.WriteLine();
-                    break; 
+                    searchedPlaylist.Add(playlist.PlaylistSongs[i]);
                 }
-                else
-                {
-                    Console.WriteLine($"The song {songName} could not be found in this playlist");
-                    Console.WriteLine();
-                }
+            }
+            for (int i = 0; i < searchedPlaylist.Count; i++)
+            {
+                Console.WriteLine(searchedPlaylist[i]);
+                Console.WriteLine();
             }
         }
 
+        public void SearchGenre(Playlist playlist, Genre genre)
+        {
+            List<MPThree> searchedPlaylist = new List<MPThree>();
+
+            Console.WriteLine("-------SONGS FOUND-------");
+            Console.WriteLine();
+            for (int i = 0; i < playlist.PlaylistSongs.Count; i++)
+            {
+                if (playlist.PlaylistSongs[i].Genre == genre)
+                {
+                    searchedPlaylist.Add(playlist.PlaylistSongs[i]);
+                }
+            }
+            for (int i = 0; i < searchedPlaylist.Count; i++)
+            {
+                Console.WriteLine(searchedPlaylist[i]);
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Searches for songs in the playlist via the user's entered artist name
+        /// </summary>
+        /// <param name="playlist">the created playlist</param>
+        /// <param name="artistName">the artist's name the user is searching for</param>
         public void SearchArtistName(Playlist playlist, string artistName)
         {
             List<MPThree> searchedPlaylist = new List<MPThree>();
 
+            Console.WriteLine("-------SONGS FOUND-------");
+            Console.WriteLine();
             for(int i = 0; i < playlist.PlaylistSongs.Count; i++)
             {
                 if (playlist.PlaylistSongs[i].Artist == artistName)
@@ -145,8 +178,17 @@ namespace Project1MP3
                     searchedPlaylist.Add(playlist.PlaylistSongs[i]);
                 }
             }
+            for(int i = 0; i < searchedPlaylist.Count; i++)
+            {
+                Console.WriteLine(searchedPlaylist[i]);
+                Console.WriteLine();
+            }
         }
 
+        /// <summary>
+        /// ToString method to display all MP3's in the playlist
+        /// </summary>
+        /// <returns>The playlist as a string</returns>
         public override string ToString()
         {
             string info = "";

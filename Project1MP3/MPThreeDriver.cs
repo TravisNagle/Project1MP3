@@ -70,17 +70,17 @@ public class MPThreeDriver
             Console.WriteLine("Menu for Project 3 - MP3 Tracker");
             Console.WriteLine("------------------------");
             Console.WriteLine();
-            Console.WriteLine("1. Create a new playlist");
-            Console.WriteLine("2. Create a new MP3");
+            Console.WriteLine("1. Create a new playlist"); //done
+            Console.WriteLine("2. Create a new MP3"); //done
             Console.WriteLine("3. Edit an MP3");
             Console.WriteLine("4. Remove an MP3");
-            Console.WriteLine("5. Display playlist");
-            Console.WriteLine("6. Search by song name");
+            Console.WriteLine("5. Display playlist"); //done
+            Console.WriteLine("6. Search by song name"); //done
             Console.WriteLine("7. Search by genre");
             Console.WriteLine("8. Search by artist");
             Console.WriteLine("9. Sort songs by title");
             Console.WriteLine("10. Sort by release date");
-            Console.WriteLine("11. Exit");
+            Console.WriteLine("11. Exit"); //done
 
 
             userChoice = Console.ReadLine();
@@ -99,7 +99,8 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 2:
-                AddSong(username, playlist);
+                MPThree song = AddSong(username, playlist);
+                playlist.SetSong(song);
                 Menu(username, newSong, playlist);
                 break;
             case 3:
@@ -192,23 +193,61 @@ public class MPThreeDriver
             releaseDateChoice = Console.ReadLine();
         } while (releaseDateChoice == "");
 
-        double playbackTimeChoice;
+        double playbackTimeChoice = 0;
         do
         {
-            Console.WriteLine("Playback Time: ");
-            playbackTimeChoice = double.Parse(Console.ReadLine());
+            bool isValid = false;
+            while(!isValid)
+            {
+                try
+                {
+                    Console.WriteLine("Playback Time: ");
+                    playbackTimeChoice = double.Parse(Console.ReadLine());
+                    isValid = true;
+                }
+                catch(FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         } while (playbackTimeChoice < 0);
 
-        Genre userGenre;
-        Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
-        string genreChoice = Console.ReadLine();
-        userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
+        Genre userGenre = Genre.Other;
+        string genreChoice = "";
+        bool valid = false;
+        while(!valid)
+        {
+            try
+            {
+                Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
+                genreChoice = Console.ReadLine();
+                userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
+                valid = true;
+            }
+            catch(ArgumentException e)
+            {
+                Console.WriteLine("You have chosen an invalid option, please try again.");
+            }
+        }
 
-        decimal downloadCostChoice;
+
+        decimal downloadCostChoice = 0;
         do
         {
-            Console.WriteLine("Download Cost: ");
-            downloadCostChoice = decimal.Parse(Console.ReadLine());
+            bool isValid = false;
+            while(!isValid)
+            {
+                try
+                {
+                    Console.WriteLine("Download Cost: ");
+                    downloadCostChoice = decimal.Parse(Console.ReadLine());
+                    isValid = true;
+                }
+                catch(FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         } while (downloadCostChoice < 0);
 
         string imagePathChoice;
@@ -218,17 +257,29 @@ public class MPThreeDriver
             imagePathChoice = Console.ReadLine();
         } while (imagePathChoice == "");
 
-        double fileSizeChoice;
+        double fileSizeChoice = 0;
         do
         {
-            Console.WriteLine("File Size: ");
-            fileSizeChoice = double.Parse(Console.ReadLine());
+            bool isValid = false;
+            while(!isValid)
+            {
+                try
+                {
+                    Console.WriteLine("File Size: ");
+                    fileSizeChoice = double.Parse(Console.ReadLine());
+                    isValid = true;
+                }
+                catch(FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         } while (fileSizeChoice < 0);
 
         //Creates the new song based on user specifications.
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
-        Console.WriteLine($"Song Created!\n");
+        Console.WriteLine($"Song Created and Added!\n");
         return newSong;
     }
 
@@ -251,7 +302,8 @@ public class MPThreeDriver
     }
 
     /// <summary>
-    /// Searches the playlist for the song that contains the name of the song the user enters.
+    /// Searches the playlist for the song that contains the name of the song the user
+    /// is searching for
     /// </summary>
     /// <param name="username">user entered name</param>
     /// <param name="playlist">created playlist object</param>
@@ -264,6 +316,17 @@ public class MPThreeDriver
         playlist.SearchSongName(playlist, searchedSongName);
     }
 
+    public static void SearchGenre(string username, Playlist playlist)
+    {
+
+    }
+
+    /// <summary>
+    /// Searches the playlist for the song that contains the artist name of the song the user
+    /// is searching for
+    /// </summary>
+    /// <param name="username">user entered name</param>
+    /// <param name="playlist">created playlist object</param>
     public static void SearchArtist(string username, Playlist playlist)
     {
         string searchedArtistName = "";
