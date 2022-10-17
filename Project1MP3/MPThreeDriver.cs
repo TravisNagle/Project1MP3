@@ -30,13 +30,6 @@ public class MPThreeDriver
     {
         MPThree song = new MPThree();
         Playlist playlist = new Playlist();
-        //Playlist playlist = new Playlist();
-        string username = "Gamer";
-        Menu(username, song, playlist);
-
-        /*
-        //Creates a default song to verify the user has created a new song
-        MPThree defaultSong = new MPThree();
 
         Console.WriteLine("Hello! Welcome to the MP3 Tracker Program! Here you can download, catalog, and play MP3 music files!");
 
@@ -51,20 +44,21 @@ public class MPThreeDriver
 
         Console.WriteLine($"Welcome {userName}! Please enjoy MP3 Tracker.");
         //Takes user to the menu
-        Menu(userName, defaultSong);
-        */
+        Menu(userName, song, playlist);
+        
     }
 
     /// <summary>
     /// Menu method that displays the menu options for the user which gives
-    /// the user three possible menu routes.
+    /// the user eleven possible menu routes.
     /// </summary>
     /// <param name="userName">Takes username value to save it for menu option 3.</param>
     /// <param name="newSong">Takes a new song value to store.</param>
+    /// <param name="playlist">Takes a playlist value to store</param>
     public static void Menu(string username, MPThree newSong, Playlist playlist)
     {
         string userChoice;
-        //Displays the menu options while the user has not entered 1, 2, or 3.
+        //Displays the menu options while the user has not entered any of the valid options.
         do
         {
             Console.WriteLine("Menu for Project 3 - MP3 Tracker");
@@ -104,6 +98,8 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 3:
+                EditSong(username, playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 4:
                 break;
@@ -287,9 +283,7 @@ public class MPThreeDriver
 
     public static void EditSong(string username, Playlist playlist)
     {
-        int songChoice = -1;
-        Console.Write($"Which song would you like to edit: ");
-        songChoice = int.Parse(Console.ReadLine());
+        playlist = playlist.EditSong(playlist);
     }
 
     /// <summary>

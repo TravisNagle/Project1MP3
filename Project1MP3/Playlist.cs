@@ -96,22 +96,143 @@ namespace Project1MP3
             return size;
         }
 
-        public MPThree EditSong(MPThree song)
+        public Playlist EditSong(Playlist playlist)
         {
             Console.WriteLine("-------EDIT SONG-------");
+            bool isValid = false;
+            int userChoice = -1;
 
-            Console.Write("Song Title: ");
-            song.SongTitle = Console.ReadLine();
-            Console.Write("Artist Name: ");
-            song.Artist = Console.ReadLine();
-            song.SongReleaseDate = Console.ReadLine();
-            song.PlaybackTime = double.Parse(Console.ReadLine());
-            song.Genre = (Genre)Enum.Parse(typeof(Genre), Console.ReadLine());
-            song.DownloadCost = decimal.Parse(Console.ReadLine());
-            song.ImagePath = Console.ReadLine();
-            song.FileSize = double.Parse(Console.ReadLine());
+            while (!isValid)
+            {
+                try
+                {
+                    do
+                    {
+                        Console.WriteLine(playlist);
+                        Console.WriteLine("Select a song to edit: ");
+                        userChoice = int.Parse(Console.ReadLine());
+                        isValid = true;
+                    }
+                    while (!(userChoice > 0 || userChoice <= playlist.PlaylistSongs.Count));
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
 
-            return song;
+            string nameChoice;
+            do
+            {
+                Console.WriteLine("Song Name: ");
+                nameChoice = Console.ReadLine();
+            } while (nameChoice == "");
+
+            string artistChoice;
+            do
+            {
+                Console.WriteLine("Artist Name: ");
+                artistChoice = Console.ReadLine();
+            } while (artistChoice == "");
+
+            string releaseDateChoice;
+            do
+            {
+                Console.WriteLine("Release Date: ");
+                releaseDateChoice = Console.ReadLine();
+            } while (releaseDateChoice == "");
+
+            double playbackTimeChoice = 0;
+            do
+            {
+                bool checkValid = false;
+                while (!isValid)
+                {
+                    try
+                    {
+                        Console.WriteLine("Playback Time: ");
+                        playbackTimeChoice = double.Parse(Console.ReadLine());
+                        isValid = true;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            } while (playbackTimeChoice < 0);
+
+            Genre userGenre = Genre.Other;
+            string genreChoice = "";
+            bool valid = false;
+            while (!valid)
+            {
+                try
+                {
+                    Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
+                    genreChoice = Console.ReadLine();
+                    userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
+                    valid = true;
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine("You have chosen an invalid option, please try again.");
+                }
+            }
+
+            decimal downloadCostChoice = 0;
+            do
+            {
+                bool checkValid = false;
+                while (!isValid)
+                {
+                    try
+                    {
+                        Console.WriteLine("Download Cost: ");
+                        downloadCostChoice = decimal.Parse(Console.ReadLine());
+                        checkValid = true;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            } while (downloadCostChoice < 0);
+
+            string imagePathChoice;
+            do
+            {
+                Console.WriteLine("Image Path: ");
+                imagePathChoice = Console.ReadLine();
+            } while (imagePathChoice == "");
+
+            double fileSizeChoice = 0;
+            do
+            {
+                bool checkValid = false;
+                while (!isValid)
+                {
+                    try
+                    {
+                        Console.WriteLine("File Size: ");
+                        fileSizeChoice = double.Parse(Console.ReadLine());
+                        checkValid = true;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            } while (fileSizeChoice < 0);
+
+            MPThree editedSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
+            playlist.PlaylistSongs.RemoveAt(userChoice - 1);
+            playlist.PlaylistSongs.Add(editedSong);
+
+            Console.WriteLine("Song Edited!");
+            Console.WriteLine($"Press \"ENTER\" to return to the menu.");
+            Console.ReadKey();
+
+            return playlist;
         }
 
         /// <summary>
@@ -197,8 +318,9 @@ namespace Project1MP3
             info += $"\nCreation Date: {CreationDate}";
 
             for (int i = 0; i < PlaylistSongs.Count; i++)
+            {
                 info += $"\nSong {i + 1} \n{PlaylistSongs[i]}";
-
+            }
             return info;
         }
     }
