@@ -235,6 +235,12 @@ namespace Project1MP3
             return playlist;
         }
 
+        /// <summary>
+        /// Removes a song from a created playlist
+        /// </summary>
+        /// <param name="playlist">user created playlist</param>
+        /// <param name="songPos">one past the position of the song to be removed</param>
+        /// <returns></returns>
         public Playlist RemoveSong(Playlist playlist, int songPos)
         {
             playlist.PlaylistSongs.RemoveAt(songPos - 1);
@@ -269,6 +275,11 @@ namespace Project1MP3
             }
         }
 
+        /// <summary>
+        /// Searches the playlist via the user's entered genre
+        /// </summary>
+        /// <param name="playlist">the created playlist</param>
+        /// <param name="genre">the genre the user is searching for</param>
         public void SearchGenre(Playlist playlist, Genre genre)
         {
             List<MPThree> searchedPlaylist = new List<MPThree>();
