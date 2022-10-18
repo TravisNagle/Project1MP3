@@ -40,9 +40,9 @@ namespace Project1MP3
         {
             PlaylistSongs = new List<MPThree>();
             PlaylistSongs.Add(new MPThree());
-            PlaylistName = "";
-            PlaylistCreator = "";
-            CreationDate = "";
+            PlaylistName = null;
+            PlaylistCreator = null;
+            CreationDate = null;
         }
 
         /// <summary>
@@ -332,11 +332,23 @@ namespace Project1MP3
             }
         }
 
+        /// <summary>
+        /// Sorts the playlist alphabetically by the song titles in the playlist
+        /// </summary>
+        /// <param name="playlist">the created playlist</param>
         public void SortByTitle(Playlist playlist)
         {
             playlist.PlaylistSongs.Sort(delegate (MPThree songOne, MPThree songTwo)
             {
                 return songOne.SongTitle.CompareTo(songTwo.SongTitle);
+            });
+        }
+
+        public void SortByDate(Playlist playlist)
+        {
+            playlist.PlaylistSongs.Sort(delegate (MPThree songOne, MPThree songTwo)
+            {
+                return songOne.SongTitle.CompareTo(songTwo.SongReleaseDate);
             });
         }
 

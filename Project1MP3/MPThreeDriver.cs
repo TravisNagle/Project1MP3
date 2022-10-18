@@ -72,7 +72,7 @@ public class MPThreeDriver
             Console.WriteLine("6. Search by song name"); //done
             Console.WriteLine("7. Search by genre"); //done
             Console.WriteLine("8. Search by artist"); //done
-            Console.WriteLine("9. Sort songs by title");
+            Console.WriteLine("9. Sort songs by title"); //done
             Console.WriteLine("10. Sort by release date");
             Console.WriteLine("11. Exit"); //done
 
@@ -93,7 +93,7 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 2:
-                if(playlist.PlaylistName == "")
+                if(playlist.PlaylistName == null)
                 {
                     Console.WriteLine("There is no playlist created, please create a playlist to add a song.");
                     Menu(username, newSong, playlist);
@@ -134,6 +134,8 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 10:
+                playlist.SortByDate(playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 11:
                 Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
