@@ -28,7 +28,7 @@ namespace Project1MP3
     public class Playlist
     {
         private List<MPThree> PlaylistSongs { get; set; }
-        private string PlaylistName { get; set; }
+        public string PlaylistName { get; set; }
         private string PlaylistCreator { get; set; }
         private string CreationDate { get; set; }
 
@@ -231,6 +231,14 @@ namespace Project1MP3
             Console.WriteLine("Song Edited!");
             Console.WriteLine($"Press \"ENTER\" to return to the menu.");
             Console.ReadKey();
+
+            return playlist;
+        }
+
+        public Playlist RemoveSong(Playlist playlist, int songPos)
+        {
+            playlist.PlaylistSongs.RemoveAt(songPos - 1);
+            Console.WriteLine($"Song {songPos} has been removed");
 
             return playlist;
         }

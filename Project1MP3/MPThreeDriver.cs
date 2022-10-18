@@ -93,18 +93,29 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 2:
-                MPThree song = AddSong(username, playlist);
-                playlist.SetSong(song);
-                Menu(username, newSong, playlist);
+                if(playlist.PlaylistName == "")
+                {
+                    Console.WriteLine("There is no playlist created, please create a playlist to add a song.");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    MPThree song = AddSong(username, playlist);
+                    playlist.SetSong(song);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 3:
                 EditSong(username, playlist);
                 Menu(username, newSong, playlist);
                 break;
             case 4:
+                playlist = RemoveSong(username, playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 5:
                 DisplayPlaylist(username, playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 6:
                 SearchName(username, playlist);
@@ -121,7 +132,6 @@ public class MPThreeDriver
             case 9:
                 break;
             case 10:
-                DisplaySong(username, newSong, playlist);
                 break;
             case 11:
                 Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
@@ -132,15 +142,28 @@ public class MPThreeDriver
         }
     }
 
+    /// <summary>
+    /// Creates a new playlist with a user defined number of songs added
+    /// </summary>
+    /// <param name="username">user entered name</param>
+    /// <returns>a created playlist object with all songs user enters</returns>
     public static Playlist CreatePlaylist(string username)
     {
-        string playlistName;
-        Console.Write("Playlist Name: ");
-        playlistName = Console.ReadLine();
+        string playlistName = "";
+        do
+        {
+            Console.Write("Playlist Name: ");
+            playlistName = Console.ReadLine();
+        }
+        while (playlistName == "");
 
-        string creationDate;
-        Console.Write("Creation Date: ");
-        creationDate = Console.ReadLine();
+        string creationDate = "";
+        do
+        {
+            Console.Write("Creation Date: ");
+            creationDate = Console.ReadLine();
+        }
+        while (creationDate == "");
 
         List<MPThree> playlistSong = new List<MPThree>();
         Playlist playlist = new Playlist(playlistSong, username, playlistName, creationDate);
@@ -286,6 +309,31 @@ public class MPThreeDriver
         playlist = playlist.EditSong(playlist);
     }
 
+    public static Playlist RemoveSong(string username, Playlist playlist)
+    {
+        Console.WriteLine("-------REMOVE SONG-------");
+        Console.WriteLine(playlist);
+        int userChoice = 0;
+
+        bool isValid = false;
+        while(!isValid)
+        {
+            try
+            {
+                Console.Write("Please select the song number of the song you would like to remove: ");
+                userChoice = int.Parse(Console.ReadLine());
+                isValid = true;
+            }
+        catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        playlist.RemoveSong(playlist, userChoice);
+
+        return playlist;
+    }
+
     /// <summary>
     /// Displays the playlist to the console
     /// </summary>
@@ -295,6 +343,8 @@ public class MPThreeDriver
     {
         Console.WriteLine("-------DISPLAYING PLAYLIST-------");
         Console.WriteLine(playlist);
+        Console.WriteLine($"Press \nENTER\n to return to the main menu");
+        Console.ReadKey();
     }
 
     /// <summary>
