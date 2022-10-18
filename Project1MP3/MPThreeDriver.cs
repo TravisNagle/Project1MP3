@@ -52,8 +52,8 @@ public class MPThreeDriver
     /// Menu method that displays the menu options for the user which gives
     /// the user eleven possible menu routes.
     /// </summary>
-    /// <param name="userName">Takes username value to save it for menu option 3.</param>
-    /// <param name="newSong">Takes a new song value to store.</param>
+    /// <param name="userName">Takes username value to save it</param>
+    /// <param name="newSong">Takes a new song value to store</param>
     /// <param name="playlist">Takes a playlist value to store</param>
     public static void Menu(string username, MPThree newSong, Playlist playlist)
     {
@@ -67,7 +67,7 @@ public class MPThreeDriver
             Console.WriteLine("1. Create a new playlist"); //done
             Console.WriteLine("2. Create a new MP3"); //done
             Console.WriteLine("3. Edit an MP3");
-            Console.WriteLine("4. Remove an MP3");
+            Console.WriteLine("4. Remove an MP3"); //done
             Console.WriteLine("5. Display playlist"); //done
             Console.WriteLine("6. Search by song name"); //done
             Console.WriteLine("7. Search by genre"); //done
@@ -130,6 +130,8 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 9:
+                playlist = SortByTitle(playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 10:
                 break;
@@ -306,6 +308,7 @@ public class MPThreeDriver
 
     public static void EditSong(string username, Playlist playlist)
     {
+        Console.WriteLine("-------EDIT SONG-------");
         playlist = playlist.EditSong(playlist);
     }
 
@@ -330,7 +333,6 @@ public class MPThreeDriver
             }
         }
         playlist.RemoveSong(playlist, userChoice);
-
         return playlist;
     }
 
@@ -355,6 +357,7 @@ public class MPThreeDriver
     /// <param name="playlist">created playlist object</param>
     public static void SearchName(string username, Playlist playlist)
     {
+        Console.WriteLine("-------SEARCHING BY SONG NAME-------");
         string searchedSongName = "";
         Console.Write("Enter the song you are looking for: ");
         searchedSongName = Console.ReadLine();
@@ -370,6 +373,7 @@ public class MPThreeDriver
     /// <param name="playlist">created playlist object</param>
     public static void SearchGenre(string username, Playlist playlist)
     {
+        Console.WriteLine("-------SEARCHING BY GENRE-------");
         string searchedGenre = "";
         Genre userGenre = Genre.Other;
         searchedGenre = Console.ReadLine();
@@ -399,11 +403,20 @@ public class MPThreeDriver
     /// <param name="playlist">created playlist object</param>
     public static void SearchArtist(string username, Playlist playlist)
     {
+        Console.WriteLine("-------SEARCHING BY ARTIST-------");
         string searchedArtistName = "";
         Console.Write("Enter the artist you are looking for: ");
         searchedArtistName = Console.ReadLine();
 
         playlist.SearchArtistName(playlist, searchedArtistName);
+    }
+
+    public static Playlist SortByTitle(Playlist playlist)
+    {
+        Console.WriteLine("-------SORTED BY TITLE-------");
+        playlist.SortByTitle(playlist);
+
+        return playlist;
     }
 
     /// <summary>

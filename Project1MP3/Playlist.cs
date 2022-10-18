@@ -69,27 +69,35 @@ namespace Project1MP3
         /// <param name="existingPlaylist">Previously created playlist</param>
         public Playlist(Playlist existingPlaylist)
         {
-            PlaylistSongs = existingPlaylist.PlaylistSongs;
+            List<MPThree> copiedPlaylistSongs = new List<MPThree>(PlaylistSongs);
             PlaylistName = existingPlaylist.PlaylistName;
             PlaylistCreator = existingPlaylist.PlaylistCreator;
             CreationDate = existingPlaylist.CreationDate;
         }
 
+        /// <summary>
+        /// Displays the songs of the playlist
+        /// </summary>
+        /// <returns>list of MPThree objects in playlist</returns>
         public List<MPThree> GetPlaylist()
         {
             return PlaylistSongs;
         }
 
+        /// <summary>
+        /// Adds a MPThree object to an existing playlist
+        /// </summary>
+        /// <param name="song">MPThree to be added</param>
         public void SetSong(MPThree song)
         {
             PlaylistSongs.Add(song);
         }
 
-        public void RemoveSong(MPThree song)
-        {
-            PlaylistSongs.Remove(song);
-        }
-
+        /// <summary>
+        /// Displays the size of the playlist as an integer of the number of songs
+        /// </summary>
+        /// <param name="playlist">the playlist to be counted</param>
+        /// <returns>the size as an integer</returns>
         public int PlaylistSize(Playlist playlist)
         {
             int size = playlist.PlaylistSongs.Count;
@@ -98,7 +106,6 @@ namespace Project1MP3
 
         public Playlist EditSong(Playlist playlist)
         {
-            Console.WriteLine("-------EDIT SONG-------");
             bool isValid = false;
             int userChoice = -1;
 
@@ -323,6 +330,14 @@ namespace Project1MP3
                 Console.WriteLine(searchedPlaylist[i]);
                 Console.WriteLine();
             }
+        }
+
+        public void SortByTitle(Playlist playlist)
+        {
+            playlist.PlaylistSongs.Sort(delegate (MPThree songOne, MPThree songTwo)
+            {
+                return songOne.SongTitle.CompareTo(songTwo.SongTitle);
+            });
         }
 
         /// <summary>
