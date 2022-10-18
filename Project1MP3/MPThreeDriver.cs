@@ -413,6 +413,11 @@ public class MPThreeDriver
         playlist.SearchArtistName(playlist, searchedArtistName);
     }
 
+    /// <summary>
+    /// Sorts the playlist by the song titles aphabetically
+    /// </summary>
+    /// <param name="playlist">the created playlist</param>
+    /// <returns>the playlist sorted by song title</returns>
     public static Playlist SortByTitle(Playlist playlist)
     {
         Console.WriteLine("-------SORTED BY TITLE-------");
