@@ -314,6 +314,12 @@ public class MPThreeDriver
         playlist = playlist.EditSong(playlist);
     }
 
+    /// <summary>
+    /// Removes a song from the position the user chooses from the playlist
+    /// </summary>
+    /// <param name="username">user created name</param>
+    /// <param name="playlist">created playlist</param>
+    /// <returns>playlist with song removed</returns>
     public static Playlist RemoveSong(string username, Playlist playlist)
     {
         Console.WriteLine("-------REMOVE SONG-------");
