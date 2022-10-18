@@ -134,7 +134,7 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 10:
-                playlist.SortByDate(playlist);
+                playlist = SortByReleaseDate(playlist);
                 Menu(username, newSong, playlist);
                 break;
             case 11:
@@ -422,6 +422,14 @@ public class MPThreeDriver
     {
         Console.WriteLine("-------SORTED BY TITLE-------");
         playlist.SortByTitle(playlist);
+
+        return playlist;
+    }
+
+    public static Playlist SortByReleaseDate(Playlist playlist)
+    {
+        Console.WriteLine("-------SORTED BY RELEASE DATE-------");
+        playlist.SortByDate(playlist);
 
         return playlist;
     }
