@@ -120,7 +120,7 @@ namespace Project1MP3
                         userChoice = int.Parse(Console.ReadLine());
                         isValid = true;
                     }
-                    while (!(userChoice > 0 || userChoice <= playlist.PlaylistSongs.Count));
+                    while (userChoice <= 0 || userChoice > playlist.PlaylistSongs.Count);
                 }
                 catch (FormatException e)
                 {
@@ -128,116 +128,133 @@ namespace Project1MP3
                 }
             }
 
-            string nameChoice;
+            int featureChoice = 0;
             do
             {
-                Console.WriteLine("Song Name: ");
-                nameChoice = Console.ReadLine();
-            } while (nameChoice == "");
-
-            string artistChoice;
-            do
-            {
-                Console.WriteLine("Artist Name: ");
-                artistChoice = Console.ReadLine();
-            } while (artistChoice == "");
-
-            string releaseDateChoice;
-            do
-            {
-                Console.WriteLine("Release Date: ");
-                releaseDateChoice = Console.ReadLine();
-            } while (releaseDateChoice == "");
-
-            double playbackTimeChoice = 0;
-            do
-            {
-                bool checkValid = false;
-                while (!isValid)
+                bool valid = false;
+                while(!valid)
                 {
                     try
                     {
-                        Console.WriteLine("Playback Time: ");
-                        playbackTimeChoice = double.Parse(Console.ReadLine());
-                        isValid = true;
+                        do
+                        {
+                            Console.WriteLine($"Select a feature to edit:\n1.) Song Title\n2.) Artist Name\n3.) Release Date\n4.) Playback Time\n5.) Genre\n6.) Download Cost\n7.) Image Path\n8.) File Size");
+                            featureChoice = int.Parse(Console.ReadLine());
+                            if (featureChoice <= 0 || featureChoice > 8)
+                            {
+                                Console.WriteLine($"{featureChoice} is not one of the valid selections");
+                            }                          
+                            valid = true;
+                        }
+                        while (featureChoice <= 0 || featureChoice > 8);
                     }
                     catch (FormatException e)
                     {
                         Console.WriteLine(e.Message);
                     }
-                }
-            } while (playbackTimeChoice < 0);
-
-            Genre userGenre = Genre.Other;
-            string genreChoice = "";
-            bool valid = false;
-            while (!valid)
-            {
-                try
-                {
-                    Console.WriteLine("Please select a genre:\n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
-                    genreChoice = Console.ReadLine();
-                    userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
-                    valid = true;
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine("You have chosen an invalid option, please try again.");
                 }
             }
+            while (featureChoice <= 0 || featureChoice > 8);
 
-            decimal downloadCostChoice = 0;
-            do
+            switch(featureChoice)
             {
-                bool checkValid = false;
-                while (!isValid)
-                {
-                    try
+                case 1:
+                    string titleChoice = "";
+                    bool valid1 = false;
+                    while(!valid1)
                     {
-                        Console.WriteLine("Download Cost: ");
-                        downloadCostChoice = decimal.Parse(Console.ReadLine());
-                        checkValid = true;
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("Song Title: ");
+                                titleChoice = Console.ReadLine();
+                                valid1 = true;
+                                playlist.PlaylistSongs[userChoice - 1].SongTitle = titleChoice;
+                            }
+                            while (titleChoice == "");
+                        }
+                        catch(FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
-                    catch (FormatException e)
+                    break;
+                case 2:
+                    string artistChoice = "";
+                    bool valid2 = false;
+                    while (!valid2)
                     {
-                        Console.WriteLine(e.Message);
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("Artist Name: ");
+                                artistChoice = Console.ReadLine();
+                                valid2 = true;
+                                playlist.PlaylistSongs[userChoice - 1].Artist = artistChoice;
+                            }
+                            while (artistChoice == "");
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
-                }
-            } while (downloadCostChoice < 0);
-
-            string imagePathChoice;
-            do
-            {
-                Console.WriteLine("Image Path: ");
-                imagePathChoice = Console.ReadLine();
-            } while (imagePathChoice == "");
-
-            double fileSizeChoice = 0;
-            do
-            {
-                bool checkValid = false;
-                while (!isValid)
-                {
-                    try
+                    break;
+                case 3:
+                    string releaseDate = "";
+                    bool valid3 = false;
+                    while (!valid3)
                     {
-                        Console.WriteLine("File Size: ");
-                        fileSizeChoice = double.Parse(Console.ReadLine());
-                        checkValid = true;
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("Release Date: ");
+                                releaseDate = Console.ReadLine();
+                                valid3 = true;
+                                playlist.PlaylistSongs[userChoice - 1].Artist = releaseDate;
+                            }
+                            while (releaseDate == "");
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
-                    catch (FormatException e)
+                    break;
+                case 4:
+                    double playbackTime = -1;
+                    bool valid4 = false;
+                    while (!valid4)
                     {
-                        Console.WriteLine(e.Message);
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("Playback Time: ");
+                                playbackTime = double.Parse(Console.ReadLine());
+                                valid4 = true;
+                                playlist.PlaylistSongs[userChoice - 1].PlaybackTime = playbackTime;
+                            }
+                            while (playbackTime == -1);
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
-                }
-            } while (fileSizeChoice < 0);
-
-            MPThree editedSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
-            playlist.PlaylistSongs.RemoveAt(userChoice - 1);
-            playlist.PlaylistSongs.Add(editedSong);
-
-            Console.WriteLine("Song Edited!");
-            Console.WriteLine($"Press \"ENTER\" to return to the menu.");
-            Console.ReadKey();
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+            }
 
             return playlist;
         }
@@ -348,7 +365,7 @@ namespace Project1MP3
         {
             playlist.PlaylistSongs.Sort(delegate (MPThree songOne, MPThree songTwo)
             {
-                return songOne.SongTitle.CompareTo(songTwo.SongReleaseDate);
+                return songOne.SongReleaseDate.CompareTo(songTwo.SongReleaseDate);
             });
         }
 

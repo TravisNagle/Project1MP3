@@ -57,36 +57,49 @@ public class MPThreeDriver
     /// <param name="playlist">Takes a playlist value to store</param>
     public static void Menu(string username, MPThree newSong, Playlist playlist)
     {
-        string userChoice;
-        //Displays the menu options while the user has not entered any of the valid options.
-        do
+        int userChoice = -1;
+        bool isValid = false;
+        while(!isValid)
         {
-            Console.WriteLine("Menu for Project 3 - MP3 Tracker");
-            Console.WriteLine("------------------------");
-            Console.WriteLine();
-            Console.WriteLine("1. Create a new playlist"); //done
-            Console.WriteLine("2. Create a new MP3"); //done
-            Console.WriteLine("3. Edit an MP3");
-            Console.WriteLine("4. Remove an MP3"); //done
-            Console.WriteLine("5. Display playlist"); //done
-            Console.WriteLine("6. Search by song name"); //done
-            Console.WriteLine("7. Search by genre"); //done
-            Console.WriteLine("8. Search by artist"); //done
-            Console.WriteLine("9. Sort songs by title"); //done
-            Console.WriteLine("10. Sort by release date");
-            Console.WriteLine("11. Exit"); //done
+            try
+            {
+                //Displays the menu options while the user has not entered any of the valid options.
+                do
+                {
+                    Console.WriteLine("Menu for Project 3 - MP3 Tracker");
+                    Console.WriteLine("------------------------");
+                    Console.WriteLine();
+                    Console.WriteLine("1. Create a new playlist"); //done
+                    Console.WriteLine("2. Create a new MP3"); //done
+                    Console.WriteLine("3. Edit an MP3");
+                    Console.WriteLine("4. Remove an MP3"); //done
+                    Console.WriteLine("5. Display playlist"); //done
+                    Console.WriteLine("6. Search by song name"); //done
+                    Console.WriteLine("7. Search by genre"); //done
+                    Console.WriteLine("8. Search by artist"); //done
+                    Console.WriteLine("9. Sort songs by title"); //done
+                    Console.WriteLine("10. Sort by release date");
+                    Console.WriteLine("11. Exit"); //done
 
 
-            userChoice = Console.ReadLine();
+                    userChoice = int.Parse(Console.ReadLine());
+                    isValid = true;
 
-            //Checks if the user has chosen a one of the provided options
-            if (!(int.Parse(userChoice) > 0 && int.Parse(userChoice) < 12))
-                Console.WriteLine("That was not one of the valid options. Please try again.");
+                    //Checks if the user has chosen a one of the provided options
+                    if (userChoice <= 0 || userChoice > 11)
+                        Console.WriteLine("That was not one of the valid options. Please try again.");
 
-        } while (!(int.Parse(userChoice) > 0 && int.Parse(userChoice) < 12));
+                } while (userChoice <= 0 || userChoice > 11);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         
+       
         //Checks for which menu option the user has chosen and directs them through that route.
-        switch (int.Parse(userChoice))
+        switch (userChoice)
         {
             case 1:
                 playlist = CreatePlaylist(username);
