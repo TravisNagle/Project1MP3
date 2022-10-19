@@ -104,6 +104,11 @@ namespace Project1MP3
             return size;
         }
 
+        /// <summary>
+        /// Edits a song within a created playlist object
+        /// </summary>
+        /// <param name="playlist">created playlist object</param>
+        /// <returns>the playlist with the user-chosen song edited</returns>
         public Playlist EditSong(Playlist playlist)
         {
             bool isValid = false;
@@ -160,8 +165,8 @@ namespace Project1MP3
             {
                 case 1:
                     string titleChoice = "";
-                    bool valid1 = false;
-                    while(!valid1)
+                    bool validTitle = false;
+                    while(!validTitle)
                     {
                         try
                         {
@@ -169,7 +174,7 @@ namespace Project1MP3
                             {
                                 Console.Write("Song Title: ");
                                 titleChoice = Console.ReadLine();
-                                valid1 = true;
+                                validTitle = true;
                                 playlist.PlaylistSongs[userChoice - 1].SongTitle = titleChoice;
                             }
                             while (titleChoice == "");
@@ -182,8 +187,8 @@ namespace Project1MP3
                     break;
                 case 2:
                     string artistChoice = "";
-                    bool valid2 = false;
-                    while (!valid2)
+                    bool validArtist = false;
+                    while (!validArtist)
                     {
                         try
                         {
@@ -191,7 +196,7 @@ namespace Project1MP3
                             {
                                 Console.Write("Artist Name: ");
                                 artistChoice = Console.ReadLine();
-                                valid2 = true;
+                                validArtist = true;
                                 playlist.PlaylistSongs[userChoice - 1].Artist = artistChoice;
                             }
                             while (artistChoice == "");
@@ -204,8 +209,8 @@ namespace Project1MP3
                     break;
                 case 3:
                     string releaseDate = "";
-                    bool valid3 = false;
-                    while (!valid3)
+                    bool validDate = false;
+                    while (!validDate)
                     {
                         try
                         {
@@ -213,7 +218,7 @@ namespace Project1MP3
                             {
                                 Console.Write("Release Date: ");
                                 releaseDate = Console.ReadLine();
-                                valid3 = true;
+                                validDate = true;
                                 playlist.PlaylistSongs[userChoice - 1].Artist = releaseDate;
                             }
                             while (releaseDate == "");
@@ -226,8 +231,8 @@ namespace Project1MP3
                     break;
                 case 4:
                     double playbackTime = -1;
-                    bool valid4 = false;
-                    while (!valid4)
+                    bool validTime = false;
+                    while (!validTime)
                     {
                         try
                         {
@@ -235,7 +240,7 @@ namespace Project1MP3
                             {
                                 Console.Write("Playback Time: ");
                                 playbackTime = double.Parse(Console.ReadLine());
-                                valid4 = true;
+                                validTime = true;
                                 playlist.PlaylistSongs[userChoice - 1].PlaybackTime = playbackTime;
                             }
                             while (playbackTime == -1);
@@ -249,8 +254,8 @@ namespace Project1MP3
                 case 5:
                     Genre userGenre = Genre.Other;
                     string genreChoice = "";
-                    bool valid5 = false;
-                    while (!valid5)
+                    bool validGenre = false;
+                    while (!validGenre)
                     {
                         try
                         {
@@ -259,7 +264,7 @@ namespace Project1MP3
                                 Console.Write("Genre: ");
                                 genreChoice = Console.ReadLine();
                                 userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice);
-                                valid5 = true;
+                                validGenre = true;
                                 playlist.PlaylistSongs[userChoice - 1].Genre = userGenre;
                             }
                             while (genreChoice == "");
@@ -276,8 +281,8 @@ namespace Project1MP3
                     break;
                 case 6:
                     decimal downloadCost = -1;
-                    bool valid6 = false;
-                    while (!valid6)
+                    bool validCost = false;
+                    while (!validCost)
                     {
                         try
                         {
@@ -285,7 +290,7 @@ namespace Project1MP3
                             {
                                 Console.Write("Download Cost: ");
                                 downloadCost = decimal.Parse(Console.ReadLine());
-                                valid6 = true;
+                                validCost = true;
                                 playlist.PlaylistSongs[userChoice - 1].DownloadCost = downloadCost;
                             }
                             while (downloadCost == -1);
@@ -298,8 +303,8 @@ namespace Project1MP3
                     break;
                 case 7:
                     string imagePath = "";
-                    bool valid7 = false;
-                    while (!valid7)
+                    bool validPath = false;
+                    while (!validPath)
                     {
                         try
                         {
@@ -307,7 +312,7 @@ namespace Project1MP3
                             {
                                 Console.Write("Image Path: ");
                                 imagePath = Console.ReadLine();
-                                valid7 = true;
+                                validPath = true;
                                 playlist.PlaylistSongs[userChoice - 1].ImagePath = imagePath;
                             }
                             while (imagePath == "");
@@ -320,8 +325,8 @@ namespace Project1MP3
                     break;
                 case 8:
                     double fileSize = -1;
-                    bool valid8 = false;
-                    while (!valid8)
+                    bool validFile = false;
+                    while (!validFile)
                     {
                         try
                         {
@@ -329,7 +334,7 @@ namespace Project1MP3
                             {
                                 Console.Write("File Size: ");
                                 fileSize = double.Parse(Console.ReadLine());
-                                valid4 = true;
+                                validFile = true;
                                 playlist.PlaylistSongs[userChoice - 1].FileSize = fileSize;
                             }
                             while (fileSize == -1);
