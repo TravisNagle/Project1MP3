@@ -247,15 +247,100 @@ namespace Project1MP3
                     }
                     break;
                 case 5:
+                    Genre userGenre = Genre.Other;
+                    string genreChoice = "";
+                    bool valid5 = false;
+                    while (!valid5)
+                    {
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("Genre: ");
+                                genreChoice = Console.ReadLine();
+                                userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice);
+                                valid5 = true;
+                                playlist.PlaylistSongs[userChoice - 1].Genre = userGenre;
+                            }
+                            while (genreChoice == "");
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("Your input was not valid, please try again.");
+                        }
+                    }
                     break;
                 case 6:
+                    decimal downloadCost = -1;
+                    bool valid6 = false;
+                    while (!valid6)
+                    {
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("Download Cost: ");
+                                downloadCost = decimal.Parse(Console.ReadLine());
+                                valid6 = true;
+                                playlist.PlaylistSongs[userChoice - 1].DownloadCost = downloadCost;
+                            }
+                            while (downloadCost == -1);
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
                     break;
                 case 7:
+                    string imagePath = "";
+                    bool valid7 = false;
+                    while (!valid7)
+                    {
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("Image Path: ");
+                                imagePath = Console.ReadLine();
+                                valid7 = true;
+                                playlist.PlaylistSongs[userChoice - 1].ImagePath = imagePath;
+                            }
+                            while (imagePath == "");
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
                     break;
                 case 8:
+                    double fileSize = -1;
+                    bool valid8 = false;
+                    while (!valid8)
+                    {
+                        try
+                        {
+                            do
+                            {
+                                Console.Write("File Size: ");
+                                fileSize = double.Parse(Console.ReadLine());
+                                valid4 = true;
+                                playlist.PlaylistSongs[userChoice - 1].FileSize = fileSize;
+                            }
+                            while (fileSize == -1);
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
                     break;
             }
-
             return playlist;
         }
 
