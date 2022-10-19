@@ -103,6 +103,7 @@ public class MPThreeDriver
         {
             case 1:
                 playlist = CreatePlaylist(username);
+                playlist.GetPlaylist();
                 Menu(username, newSong, playlist);
                 break;
             case 2:
@@ -190,8 +191,7 @@ public class MPThreeDriver
         {
             Console.WriteLine("Press any button to add a song, -1 to quit");
             userChoice = Console.ReadLine();
-            if (userChoice == "-1")
-                break;
+            if (userChoice == "-1") break;
 
             MPThree song = AddSong(username, playlist);
             playlist.SetSong(song);
@@ -319,9 +319,6 @@ public class MPThreeDriver
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
         Console.WriteLine($"Song Created and Added!\n");
-        Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
-        Console.ReadKey();
-
         return newSong;
     }
 
