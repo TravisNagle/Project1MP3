@@ -71,7 +71,7 @@ public class MPThreeDriver
                     Console.WriteLine();
                     Console.WriteLine("1. Create a new playlist"); //done
                     Console.WriteLine("2. Create a new MP3"); //done
-                    Console.WriteLine("3. Edit an MP3");
+                    Console.WriteLine("3. Edit an MP3"); //done
                     Console.WriteLine("4. Remove an MP3"); //done
                     Console.WriteLine("5. Display playlist"); //done
                     Console.WriteLine("6. Search by song name"); //done
@@ -81,7 +81,6 @@ public class MPThreeDriver
                     Console.WriteLine("10. Sort by release date");
                     Console.WriteLine("11. Exit"); //done
 
-
                     userChoice = int.Parse(Console.ReadLine());
                     isValid = true;
 
@@ -89,7 +88,8 @@ public class MPThreeDriver
                     if (userChoice <= 0 || userChoice > 11)
                         Console.WriteLine("That was not one of the valid options. Please try again.");
 
-                } while (userChoice <= 0 || userChoice > 11);
+                } 
+                while (userChoice <= 0 || userChoice > 11);
             }
             catch (FormatException e)
             {
@@ -197,9 +197,10 @@ public class MPThreeDriver
             playlist.SetSong(song);
         } while (userChoice != "-1");
 
-
-        Console.WriteLine($"Playlist Created! Press \"ENTER\" to be returned to the main menu.");
+        Console.WriteLine("Playlist Created!");
+        Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
         Console.ReadKey();
+
         return playlist;
     }
 
@@ -318,13 +319,26 @@ public class MPThreeDriver
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
         Console.WriteLine($"Song Created and Added!\n");
+        Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
+        Console.ReadKey();
+
         return newSong;
     }
 
-    public static void EditSong(string username, Playlist playlist)
+    /// <summary>
+    /// Edits a song from the playlist
+    /// </summary>
+    /// <param name="username">user created name</param>
+    /// <param name="playlist">created playlist object</param>
+    /// <returns>Edited playlist</returns>
+    public static Playlist EditSong(string username, Playlist playlist)
     {
         Console.WriteLine("-------EDIT SONG-------");
         playlist = playlist.EditSong(playlist);
+        Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
+        Console.ReadKey();
+
+        return playlist;
     }
 
     /// <summary>
@@ -354,6 +368,8 @@ public class MPThreeDriver
             }
         }
         playlist.RemoveSong(playlist, userChoice);
+        Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
+        Console.ReadKey();
         return playlist;
     }
 
@@ -366,7 +382,7 @@ public class MPThreeDriver
     {
         Console.WriteLine("-------DISPLAYING PLAYLIST-------");
         Console.WriteLine(playlist);
-        Console.WriteLine($"Press \nENTER\n to return to the main menu");
+        Console.WriteLine($"Press \"ENTER\" to return to the main menu");
         Console.ReadKey();
     }
 
