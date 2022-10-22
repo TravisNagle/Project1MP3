@@ -28,14 +28,6 @@ public class MPThreeDriver
     /// </summary>
     public static void Main()
     {
-        string testDate = "12/25/2022";
-        string testDate2 = "12/25/2021";
-
-        int month = int.Parse(testDate.Split('/')[0]);
-        int year = int.Parse(testDate.Split('/')[2]);
-        Console.WriteLine(month);
-        Console.WriteLine(year);
-
         MPThree song = new MPThree();
         Playlist playlist = new Playlist();
 
@@ -77,24 +69,24 @@ public class MPThreeDriver
                     Console.WriteLine("Menu for Project 3 - MP3 Tracker");
                     Console.WriteLine("------------------------");
                     Console.WriteLine();
-                    Console.WriteLine("1. Create a new playlist"); //done
-                    Console.WriteLine("2. Create a new MP3"); //done
-                    Console.WriteLine("3. Edit an MP3"); //done
-                    Console.WriteLine("4. Remove an MP3"); //done
-                    Console.WriteLine("5. Display playlist"); //done
-                    Console.WriteLine("6. Search by song name"); //done
-                    Console.WriteLine("7. Search by genre"); //done
-                    Console.WriteLine("8. Search by artist"); //done
-                    Console.WriteLine("9. Sort songs by title"); //done
-                    Console.WriteLine("10. Sort by release date");
-                    Console.WriteLine("11. Exit"); //done
+                    Console.WriteLine("1. Create a new playlist"); 
+                    Console.WriteLine("2. Create a new MP3"); 
+                    Console.WriteLine("3. Edit an MP3"); 
+                    Console.WriteLine("4. Remove an MP3"); 
+                    Console.WriteLine("5. Display playlist"); 
+                    Console.WriteLine("6. Search by song name"); 
+                    Console.WriteLine("7. Search by genre"); 
+                    Console.WriteLine("8. Search by artist"); 
+                    Console.WriteLine("9. Sort songs by title"); 
+                    Console.WriteLine("10. Sort by release date"); 
+                    Console.WriteLine("11. Exit"); 
 
                     userChoice = int.Parse(Console.ReadLine());
                     isValid = true;
 
                     //Checks if the user has chosen a one of the provided options
                     if (userChoice <= 0 || userChoice > 11)
-                        Console.WriteLine("That was not one of the valid options. Please try again.");
+                        Console.WriteLine($"\nThat was not one of the valid options. Please try again.\n");
 
                 } 
                 while (userChoice <= 0 || userChoice > 11);
@@ -103,8 +95,7 @@ public class MPThreeDriver
             {
                 Console.WriteLine(e.Message);
             }
-        }
-        
+        }      
        
         //Checks for which menu option the user has chosen and directs them through that route.
         switch (userChoice)
@@ -117,7 +108,7 @@ public class MPThreeDriver
             case 2:
                 if(playlist.PlaylistName == null)
                 {
-                    Console.WriteLine("There is no playlist created, please create a playlist to add a song.");
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
                     Menu(username, newSong, playlist);
                 }
                 else
@@ -163,7 +154,7 @@ public class MPThreeDriver
                 Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
                 break;
             default:
-                Console.WriteLine("That was not one of the valid options, please try again.");
+                Console.WriteLine($"\nThat was not one of the valid options, please try again.\n");
                 break;
         }
     }
@@ -197,7 +188,7 @@ public class MPThreeDriver
         string userChoice = "";
         do
         {
-            Console.WriteLine("Press any button to add a song, -1 to quit");
+            Console.Write("Press any button to add a song, -1 to quit ");
             userChoice = Console.ReadLine();
             if (userChoice == "-1") break;
 
@@ -206,7 +197,7 @@ public class MPThreeDriver
         } while (userChoice != "-1");
 
         Console.WriteLine("Playlist Created!");
-        Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
+        Console.Write($"Press \"ENTER\" to return to the main menu. ");
         Console.ReadKey();
 
         return playlist;
@@ -222,14 +213,14 @@ public class MPThreeDriver
         string nameChoice;
         do
         {
-            Console.WriteLine("Song Name: ");
+            Console.Write("Song Name: ");
             nameChoice = Console.ReadLine();
         } while (nameChoice == "");
 
         string artistChoice;
         do
         {
-            Console.WriteLine("Artist Name: ");
+            Console.Write("Artist Name: ");
             artistChoice = Console.ReadLine();
         } while (artistChoice == "");
 
@@ -239,34 +230,83 @@ public class MPThreeDriver
             int month = 0;
             int day = 0;
             int year = 0;
-            
-            while(month <= 0 || month > 12)
+
+            bool isValidMonth = false;
+            while(!isValidMonth)
             {
-                Console.Write("Release Date Month: ");
-                month = int.Parse(Console.ReadLine());
+                try
+                {
+                    while (month <= 0 || month > 12)
+                    {
+
+                        Console.Write("Release Date Month: ");
+                        month = int.Parse(Console.ReadLine());
+                        isValidMonth = true;
+                    }
+                }
+                catch(FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
             if(month == 2)
             {
-                while(day <= 0 || day > 28)
+                bool isValidFeb = false;
+                while(!isValidFeb)
                 {
-                    Console.Write("Release Date Day: ");
-                    day = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        while (day <= 0 || day > 28)
+                        {
+                            Console.Write("Release Date Day: ");
+                            day = int.Parse(Console.ReadLine());
+                            isValidFeb = true;
+                        }
+                    }
+                    catch(FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
             else
             {
-                while (day <= 0 || day > 31)
+                bool isValidDay = false;
+                while(!isValidDay)
                 {
-                    Console.Write("Release Date Day: ");
-                    day = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        while (day <= 0 || day > 31)
+                        {
+                            Console.Write("Release Date Day: ");
+                            day = int.Parse(Console.ReadLine());
+                            isValidDay = true;
+                        }
+                    }
+                    catch(FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
 
-            while(year <= 0 || year > 2022)
+            bool isValidYear = false;
+            while(!isValidYear)
             {
-                Console.Write("Release Date Year: ");
-                year = int.Parse(Console.ReadLine());
+                try
+                {
+                    while (year <= 0 || year > 2022)
+                    {
+                        Console.Write("Release Date Year: ");
+                        year = int.Parse(Console.ReadLine());
+                        isValidYear = true;
+                    }
+                }
+                catch(FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
             releaseDateChoice = $"{month}/{day}/{year}";
@@ -280,7 +320,7 @@ public class MPThreeDriver
             {
                 try
                 {
-                    Console.WriteLine("Playback Time: ");
+                    Console.Write("Playback Time: ");
                     playbackTimeChoice = double.Parse(Console.ReadLine());
                     isValid = true;
                 }
@@ -318,7 +358,7 @@ public class MPThreeDriver
             {
                 try
                 {
-                    Console.WriteLine("Download Cost: ");
+                    Console.Write("Download Cost: ");
                     downloadCostChoice = decimal.Parse(Console.ReadLine());
                     isValid = true;
                 }
@@ -332,7 +372,7 @@ public class MPThreeDriver
         string imagePathChoice;
         do
         {
-            Console.WriteLine("Image Path: ");
+            Console.Write("Image Path: ");
             imagePathChoice = Console.ReadLine();
         } while (imagePathChoice == "");
 
@@ -344,7 +384,7 @@ public class MPThreeDriver
             {
                 try
                 {
-                    Console.WriteLine("File Size: ");
+                    Console.Write("File Size: ");
                     fileSizeChoice = double.Parse(Console.ReadLine());
                     isValid = true;
                 }
@@ -358,7 +398,7 @@ public class MPThreeDriver
         //Creates the new song based on user specifications.
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
-        Console.WriteLine($"Song Created and Added!\n");
+        Console.WriteLine($"\nSong Created and Added!\n");
         return newSong;
     }
 
@@ -450,13 +490,13 @@ public class MPThreeDriver
         Console.WriteLine("-------SEARCHING BY GENRE-------");
         string searchedGenre = "";
         Genre userGenre = Genre.Other;
-        searchedGenre = Console.ReadLine();
+        searchedGenre = "";
         bool valid = false;
         while (!valid)
         {
             try
             {
-                Console.Write("Enter the genre you are looking for: ");
+                Console.WriteLine("Enter the genre you are looking for: \n1. Rock\n2. Pop\n3. Jazz\n4. Country\n5. Classical\n6. Other");
                 searchedGenre = Console.ReadLine();
                 userGenre = (Genre)Enum.Parse(typeof(Genre), searchedGenre);
                 valid = true;
