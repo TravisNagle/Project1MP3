@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -455,7 +456,25 @@ namespace Project1MP3
         {
             playlist.PlaylistSongs.Sort(delegate (MPThree songOne, MPThree songTwo)
             {
-                return songOne.SongReleaseDate.CompareTo(songTwo.SongReleaseDate);
+                if(int.Parse(songOne.SongReleaseDate.Split('/')[2]) != int.Parse(songTwo.SongReleaseDate.Split('/')[2]))
+                {
+                    int sortedDate = int.Parse(songOne.SongReleaseDate.Split('/')[2]).CompareTo(int.Parse(songTwo.SongReleaseDate.Split('/')[2]));
+                    return sortedDate;
+                }
+                else if(int.Parse(songOne.SongReleaseDate.Split('/')[2]) == int.Parse(songTwo.SongReleaseDate.Split('/')[2]))
+                {
+                    if(int.Parse(songOne.SongReleaseDate.Split('/')[0]) != int.Parse(songTwo.SongReleaseDate.Split('/')[0]))
+                    {
+                        int sortedDate = int.Parse(songOne.SongReleaseDate.Split('/')[0]).CompareTo(int.Parse(songTwo.SongReleaseDate.Split('/')[0]));
+                        return sortedDate;
+                    }
+                    else if(int.Parse(songOne.SongReleaseDate.Split('/')[0]) == int.Parse(songTwo.SongReleaseDate.Split('/')[0]))
+                    {
+                        int sortedDate = int.Parse(songOne.SongReleaseDate.Split('/')[1]).CompareTo(int.Parse(songTwo.SongReleaseDate.Split('/')[1]));
+                        return sortedDate;
+                    }
+                }
+                return -1;
             });
         }
 

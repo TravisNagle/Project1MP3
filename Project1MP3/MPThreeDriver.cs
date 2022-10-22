@@ -28,6 +28,14 @@ public class MPThreeDriver
     /// </summary>
     public static void Main()
     {
+        string testDate = "12/25/2022";
+        string testDate2 = "12/25/2021";
+
+        int month = int.Parse(testDate.Split('/')[0]);
+        int year = int.Parse(testDate.Split('/')[2]);
+        Console.WriteLine(month);
+        Console.WriteLine(year);
+
         MPThree song = new MPThree();
         Playlist playlist = new Playlist();
 
@@ -225,11 +233,43 @@ public class MPThreeDriver
             artistChoice = Console.ReadLine();
         } while (artistChoice == "");
 
-        string releaseDateChoice;
+        string releaseDateChoice = "";
         do
         {
-            Console.WriteLine("Release Date: ");
-            releaseDateChoice = Console.ReadLine();
+            int month = 0;
+            int day = 0;
+            int year = 0;
+            
+            while(month <= 0 || month > 12)
+            {
+                Console.Write("Release Date Month: ");
+                month = int.Parse(Console.ReadLine());
+            }
+
+            if(month == 2)
+            {
+                while(day <= 0 || day > 28)
+                {
+                    Console.Write("Release Date Day: ");
+                    day = int.Parse(Console.ReadLine());
+                }
+            }
+            else
+            {
+                while (day <= 0 || day > 31)
+                {
+                    Console.Write("Release Date Day: ");
+                    day = int.Parse(Console.ReadLine());
+                }
+            }
+
+            while(year <= 0 || year > 2022)
+            {
+                Console.Write("Release Date Year: ");
+                year = int.Parse(Console.ReadLine());
+            }
+
+            releaseDateChoice = $"{month}/{day}/{year}";
         } while (releaseDateChoice == "");
 
         double playbackTimeChoice = 0;
@@ -464,32 +504,5 @@ public class MPThreeDriver
         playlist.SortByDate(playlist);
 
         return playlist;
-    }
-
-    /// <summary>
-    /// Method that displays the user's song if one has been created.
-    /// If no song has been created prompts the user to create one and
-    /// returns back to menu.
-    /// </summary>
-    /// <param name="userName">Takes the username and saves it for the menu.</param>
-    /// <param name="newSong">Takes the new song and displays it.</param>
-    public static void DisplaySong(string userName, MPThree newSong, Playlist playlist)
-    {
-        // Checks if user has added a song
-        if (newSong.SongTitle == null)
-        {
-            Console.WriteLine($"No menu choice exists. Please use menu choice \"1\" before trying to display an MP3 file.");
-            //Returns user to the menu
-            Menu(userName, newSong, playlist);
-        }
-        // Shows user their added song
-        else
-        {
-            Console.WriteLine(newSong);
-            Console.WriteLine($"Press \"ENTER\" to return to the menu.");
-            Console.ReadKey();
-            //Returns user to the menu
-            Menu(userName, newSong, playlist);
-        }
     }
 }
