@@ -248,7 +248,7 @@ public class MPThreeDriver
         while (creationDate == "");
 
         List<MPThree> playlistSong = new List<MPThree>();
-        Playlist playlist = new Playlist(playlistSong, username, playlistName, creationDate);
+        Playlist playlist = new Playlist(playlistSong, playlistName, username, creationDate);
 
         string userChoice = "";
         do
