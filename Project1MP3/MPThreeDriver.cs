@@ -96,7 +96,6 @@ public class MPThreeDriver
                 Console.WriteLine(e.Message);
             }
         }
-        
        
         //Checks for which menu option the user has chosen and directs them through that route.
         switch (userChoice)
