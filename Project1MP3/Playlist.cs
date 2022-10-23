@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -451,11 +452,33 @@ namespace Project1MP3
             });
         }
 
+        /// <summary>
+        /// Sorts the playlist by date checking year, month, and day and sorting by ascension
+        /// </summary>
+        /// <param name="playlist">created playlist</param>
         public void SortByDate(Playlist playlist)
         {
             playlist.PlaylistSongs.Sort(delegate (MPThree songOne, MPThree songTwo)
             {
-                return songOne.SongReleaseDate.CompareTo(songTwo.SongReleaseDate);
+                if(int.Parse(songOne.SongReleaseDate.Split('/')[2]) != int.Parse(songTwo.SongReleaseDate.Split('/')[2])) //If the starting year is less than the compared year, that date is the earliest
+                {
+                    int sortedDate = int.Parse(songOne.SongReleaseDate.Split('/')[2]).CompareTo(int.Parse(songTwo.SongReleaseDate.Split('/')[2])); 
+                    return sortedDate;
+                }
+                else if(int.Parse(songOne.SongReleaseDate.Split('/')[2]) == int.Parse(songTwo.SongReleaseDate.Split('/')[2])) //If the starting year is equal to the compared year, then the month must be checked for earliest date
+                {
+                    if(int.Parse(songOne.SongReleaseDate.Split('/')[0]) != int.Parse(songTwo.SongReleaseDate.Split('/')[0])) //If the starting month is less than the compared month, that date is the earliest date
+                    {
+                        int sortedDate = int.Parse(songOne.SongReleaseDate.Split('/')[0]).CompareTo(int.Parse(songTwo.SongReleaseDate.Split('/')[0]));
+                        return sortedDate;
+                    }
+                    else if(int.Parse(songOne.SongReleaseDate.Split('/')[0]) == int.Parse(songTwo.SongReleaseDate.Split('/')[0])) //If the starting month is equal to the compared month, then the day must be checked for the earliest date
+                    {
+                        int sortedDate = int.Parse(songOne.SongReleaseDate.Split('/')[1]).CompareTo(int.Parse(songTwo.SongReleaseDate.Split('/')[1])); //Since the day is the last possible comparison value, no other checks must be made
+                        return sortedDate;
+                    }
+                }
+                return -1;
             });
         }
 
