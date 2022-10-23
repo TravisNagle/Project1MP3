@@ -28,7 +28,7 @@ namespace Project1MP3
     /// </summary>
     public class Playlist
     {
-        private List<MPThree> PlaylistSongs { get; set; }
+        private List<MPThree> PlaylistSongs { get; set; } 
         public string PlaylistName { get; set; }
         private string PlaylistCreator { get; set; }
         private string CreationDate { get; set; }
