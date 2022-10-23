@@ -97,7 +97,6 @@ public class MPThreeDriver
             }
         }
 
-
         //Checks for which menu option the user has chosen and directs them through that route.
         switch (userChoice)
         {
@@ -603,6 +602,11 @@ public class MPThreeDriver
         return playlist;
     }
 
+    /// <summary>
+    /// Sorts the playlist by release date desccending from earliest to latest
+    /// </summary>
+    /// <param name="playlist">created playlist</param>
+    /// <returns>playlist sorted by date</returns>
     public static Playlist SortByReleaseDate(Playlist playlist)
     {
         Console.WriteLine("-------SORTED BY RELEASE DATE-------");
