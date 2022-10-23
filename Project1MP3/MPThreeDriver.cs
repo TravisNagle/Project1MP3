@@ -95,8 +95,9 @@ public class MPThreeDriver
             {
                 Console.WriteLine(e.Message);
             }
-        }      
-       
+        }
+
+
         //Checks for which menu option the user has chosen and directs them through that route.
         switch (userChoice)
         {
@@ -106,7 +107,7 @@ public class MPThreeDriver
                 Menu(username, newSong, playlist);
                 break;
             case 2:
-                if(playlist.PlaylistName == null)
+                if (playlist.PlaylistName == null)
                 {
                     Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
                     Menu(username, newSong, playlist);
@@ -119,36 +120,100 @@ public class MPThreeDriver
                 }
                 break;
             case 3:
-                EditSong(username, playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    EditSong(username, playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 4:
-                playlist = RemoveSong(username, playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    playlist = RemoveSong(username, playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 5:
-                DisplayPlaylist(username, playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    DisplayPlaylist(username, playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 6:
-                SearchName(username, playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    SearchName(username, playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 7:
-                SearchGenre(username, playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    SearchGenre(username, playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 8:
-                SearchArtist(username, playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    SearchArtist(username, playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 9:
-                playlist = SortByTitle(playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    playlist = SortByTitle(playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 10:
-                playlist = SortByReleaseDate(playlist);
-                Menu(username, newSong, playlist);
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    playlist = SortByReleaseDate(playlist);
+                    Menu(username, newSong, playlist);
+                }
                 break;
             case 11:
                 Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
