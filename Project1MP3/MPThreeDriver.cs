@@ -31,7 +31,6 @@ public class MPThreeDriver
         MPThree song = new MPThree();
         Playlist playlist = new Playlist();
 
-
         Console.WriteLine("Hello! Welcome to the MP3 Tracker Program! Here you can download, catalog, and play MP3 music files!");
 
         string userName;
@@ -280,6 +279,7 @@ public class MPThreeDriver
         {
             Console.Write("Song Name: ");
             nameChoice = Console.ReadLine();
+            nameChoice = nameChoice.Substring(0, 1).ToUpper() + nameChoice.Substring(1, nameChoice.Length - 1);
         } while (nameChoice == "");
 
         string artistChoice;

@@ -446,10 +446,63 @@ namespace Project1MP3
         /// <param name="playlist">the created playlist</param>
         public void SortByTitle(Playlist playlist)
         {
-            playlist.PlaylistSongs.Sort(delegate (MPThree songOne, MPThree songTwo)
+            int numOfElements = playlist.PlaylistSongs.Count;
+            MPThree temp = new MPThree();
+            for (int i = numOfElements; i > 1; i--)
             {
-                return songOne.SongTitle.CompareTo(songTwo.SongTitle);
-            });
+                int max = FindMaxTitle(playlist, i);
+                if (max != i - 1)
+                {
+                    temp = playlist.PlaylistSongs[max];
+                    playlist.PlaylistSongs[max] = playlist.PlaylistSongs[i - 1];
+                    playlist.PlaylistSongs[i - 1] = temp;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Searches for the highest character value in ASCII and returns the index of the string of that value
+        /// as a variable
+        /// </summary>
+        /// <param name="playlist">created playlist</param>
+        /// <param name="count">size of playlist list</param>
+        /// <returns>value of the first title alphabetically</returns>
+        public int FindMaxTitle(Playlist playlist, int count)
+        {
+            int max = 0;
+            for(int i = 1; i < count; i++)
+            {
+                int maxLength = 0;
+                string songOne = playlist.PlaylistSongs[i].SongTitle;
+                string songMax = playlist.PlaylistSongs[max].SongTitle;
+
+                if (songOne.ToCharArray()[0] > songMax.ToCharArray()[0])
+                {
+                    max = i;
+                }
+                else if(songOne.ToCharArray()[0] == songMax.ToCharArray()[0])
+                {
+                    if(songOne.ToCharArray()[1] > songMax.ToCharArray()[1])
+                    {
+                        max = i;
+                    }
+                    else if(songOne.ToCharArray()[1] == songMax.ToCharArray()[1])
+                    {
+                        if(songOne.ToCharArray()[2] > songMax.ToCharArray()[2])
+                        {
+                            max = i;
+                        }
+                        else if(songOne.ToCharArray()[2] == songMax.ToCharArray()[2])
+                        {
+                            if (songOne.ToCharArray()[3] > songMax.ToCharArray()[3])
+                            {
+                                max = i;
+                            }
+                        }
+                    }
+                }
+            }
+            return max;
         }
 
         /// <summary>
@@ -468,7 +521,6 @@ namespace Project1MP3
                     temp = playlist.PlaylistSongs[max]; 
                     playlist.PlaylistSongs[max] = playlist.PlaylistSongs[i - 1]; 
                     playlist.PlaylistSongs[i - 1] = temp; 
-                    Console.WriteLine(playlist);
                 }
             }
         }
