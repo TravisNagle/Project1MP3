@@ -458,10 +458,28 @@ namespace Project1MP3
         /// <param name="playlist">created playlist</param>
         public void SortByDate(Playlist playlist)
         {
-
+            int numOfElements = playlist.PlaylistSongs.Count;
+            MPThree temp = new MPThree();
+            for(int i = numOfElements; i > 1; i--)
+            {
+                int max = FindMaxDate(playlist, i); 
+                if(max != i - 1)
+                {
+                    temp = playlist.PlaylistSongs[max]; 
+                    playlist.PlaylistSongs[max] = playlist.PlaylistSongs[i - 1]; 
+                    playlist.PlaylistSongs[i - 1] = temp; 
+                    Console.WriteLine(playlist);
+                }
+            }
         }
 
-        public static int FindMax(Playlist playlist, int count)
+        /// <summary>
+        /// Finds the latest date index and stores it in an integer variable 
+        /// </summary>
+        /// <param name="playlist">created playlist</param>
+        /// <param name="count">size of the playlist list</param>
+        /// <returns>index of latest date</returns>
+        public static int FindMaxDate(Playlist playlist, int count)
         {
             int max = 0;
             for(int i = 1; i < count; i++)
@@ -469,6 +487,20 @@ namespace Project1MP3
                 if (int.Parse(playlist.PlaylistSongs[i].SongReleaseDate.Split('/')[2]) > int.Parse(playlist.PlaylistSongs[max].SongReleaseDate.Split('/')[2]))
                 {
                     max = i;
+                }
+                else if (int.Parse(playlist.PlaylistSongs[i].SongReleaseDate.Split('/')[2]) == int.Parse(playlist.PlaylistSongs[max].SongReleaseDate.Split('/')[2]))
+                {
+                    if (int.Parse(playlist.PlaylistSongs[i].SongReleaseDate.Split('/')[0]) > int.Parse(playlist.PlaylistSongs[max].SongReleaseDate.Split('/')[0]))
+                    {
+                        max = i;
+                    }
+                    else if(int.Parse(playlist.PlaylistSongs[i].SongReleaseDate.Split('/')[0]) == int.Parse(playlist.PlaylistSongs[max].SongReleaseDate.Split('/')[0]))
+                    {
+                        if (int.Parse(playlist.PlaylistSongs[i].SongReleaseDate.Split('/')[1]) > int.Parse(playlist.PlaylistSongs[max].SongReleaseDate.Split('/')[1]))
+                        {
+                            max = i;
+                        }
+                    }
                 }
             }
             return max;
