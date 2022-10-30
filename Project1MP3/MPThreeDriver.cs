@@ -414,7 +414,6 @@ public class MPThreeDriver
             }
         }
 
-
         decimal downloadCostChoice = 0;
         do
         {

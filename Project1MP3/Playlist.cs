@@ -559,9 +559,45 @@ namespace Project1MP3
             return max;
         }
 
-        public static void FillFromFile(string filePath)
+        public static void FillFromFile(string filePath, Playlist playlist)
         {
+            bool valid = false;
+            string text = "";
+            StreamReader reader = null;
 
+            while(!valid)
+            {
+                try
+                {
+                    reader = new StreamReader(filePath);
+                    valid = true;
+
+                    text = reader.ReadLine();
+                    string[] fields = text.Split('|');
+                    playlist = new Playlist(playlist.PlaylistSongs, fields[0], fields[1], fields[2]);
+   
+                    while (reader.Peek() != -1)
+                    {
+                        text = reader.ReadLine();
+                        fields = text.Split('|');
+
+                        MPThree song = new MPThree(fields[3], fields[4], fields[5], double.Parse(fields[6]), (Genre)Enum.Parse(typeof(Genre), fields[7]), decimal.Parse(fields[8]), fields[9], double.Parse(fields[10]));
+                    }         
+                }
+                catch (FileNotFoundException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
+            }
         }
 
         public static void SaveToFile(string filePath)
