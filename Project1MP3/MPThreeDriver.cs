@@ -663,6 +663,12 @@ public class MPThreeDriver
         return playlist;
     }
 
+    /// <summary>
+    /// Loads a text file with playlist name and songs
+    /// </summary>
+    /// <param name="filePath">path to where text file is located</param>
+    /// <param name="playlist">user created playlist</param>
+    /// <returns>Loaded playlist from text file</returns>
     public static Playlist LoadPlaylist(string filePath, Playlist playlist)
     {
         Console.WriteLine("-------LOADING PLAYLIST-------");
@@ -677,6 +683,12 @@ public class MPThreeDriver
         return playlist;
     }
 
+    /// <summary>
+    /// Saves the playlist in its current state
+    /// </summary>
+    /// <param name="filePath">path to where save text file is located</param>
+    /// <param name="playlist">user created playlist</param>
+    /// <returns>saved playlist</returns>
     public static Playlist SavePlaylist(string filePath, Playlist playlist)
     {
         Console.WriteLine("-------SAVING PLAYLIST-------");
