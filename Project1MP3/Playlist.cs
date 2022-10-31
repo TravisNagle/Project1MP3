@@ -614,6 +614,8 @@ namespace Project1MP3
                         reader.Close();
                 }
             }
+
+            SaveNeeded = true;
             return playlist;
         }
 
