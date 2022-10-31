@@ -218,6 +218,7 @@ public class MPThreeDriver
                 }
                 break;
             case 11:
+                playlist.SaveToFile("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
                 Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
                 break;
             default:

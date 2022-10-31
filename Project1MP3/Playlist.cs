@@ -589,7 +589,8 @@ namespace Project1MP3
                                 text = reader.ReadLine();
                                 fields = text.Split("|");
 
-                                MPThree song = new MPThree(fields[0], fields[1], fields[2], double.Parse(fields[3]), (Genre)Enum.Parse(typeof(Genre), fields[4]), decimal.Parse(fields[5]), fields[6], double.Parse(fields[7]));
+                                MPThree song = new MPThree(fields[0], fields[1], fields[2], double.Parse(fields[3]), (Genre)Enum.Parse(typeof(Genre), fields[4]), 
+                                                           decimal.Parse(fields[5]), fields[6], double.Parse(fields[7]));
                                 playlist.PlaylistSongs.Add(song);
                             }
                         }
@@ -619,9 +620,36 @@ namespace Project1MP3
             return playlist;
         }
 
-        public static void SaveToFile(string filePath)
+        public void SaveToFile(string filePath, Playlist playlist)
         {
-            
+            StreamWriter writer = null;
+            try
+            {
+                writer = new StreamWriter(filePath);
+                writer.WriteLine(playlist.PlaylistName + "|" + playlist.PlaylistCreator + "|" + playlist.CreationDate);
+
+                for(int i = 0; i < playlist.PlaylistSongs.Count; i++)
+                {
+                    writer.WriteLine(playlist.PlaylistSongs[i].SongTitle + "|" + playlist.PlaylistSongs[i].Artist + "|" + playlist.PlaylistSongs[i].SongReleaseDate
+                                     + "|" + playlist.PlaylistSongs[i].PlaybackTime + "|" + playlist.PlaylistSongs[i].Genre + "|" + playlist.PlaylistSongs[i].DownloadCost
+                                     + "|" + playlist.PlaylistSongs[i].ImagePath + "|" + playlist.PlaylistSongs[i].FileSize);
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if(writer != null)
+                    writer.Close();
+            }
+
+            SaveNeeded = false;
         }
 
         /// <summary>
