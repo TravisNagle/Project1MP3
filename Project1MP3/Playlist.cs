@@ -559,8 +559,9 @@ namespace Project1MP3
             return max;
         }
 
-        public static void FillFromFile(string filePath, Playlist playlist)
+        public void FillFromFile(string filePath, Playlist playlist)
         {
+
             bool valid = false;
             string text = "";
             StreamReader reader = null;
@@ -572,17 +573,31 @@ namespace Project1MP3
                     reader = new StreamReader(filePath);
                     valid = true;
 
-                    text = reader.ReadLine();
-                    string[] fields = text.Split('|');
-                    playlist = new Playlist(playlist.PlaylistSongs, fields[0], fields[1], fields[2]);
-   
-                    while (reader.Peek() != -1)
+                    try
                     {
                         text = reader.ReadLine();
-                        fields = text.Split('|');
+                        if(text == null)
+                        {
+                            Console.WriteLine("You're save file is empty");
+                        }
+                        else
+                        {
+                            string[] fields = text.Split('|');
+                            playlist = new Playlist(playlist.PlaylistSongs, fields[0], fields[1], fields[2]);
 
-                        MPThree song = new MPThree(fields[3], fields[4], fields[5], double.Parse(fields[6]), (Genre)Enum.Parse(typeof(Genre), fields[7]), decimal.Parse(fields[8]), fields[9], double.Parse(fields[10]));
-                    }         
+                            while (reader.Peek() != -1)
+                            {
+                                text = reader.ReadLine();
+                                fields = text.Split('|');
+
+                                MPThree song = new MPThree(fields[3], fields[4], fields[5], double.Parse(fields[6]), (Genre)Enum.Parse(typeof(Genre), fields[7]), decimal.Parse(fields[8]), fields[9], double.Parse(fields[10]));
+                            }
+                        }
+                    }
+                    catch(NullReferenceException e)
+                    {
+                        Console.WriteLine("This save file is empty");
+                    }
                 }
                 catch (FileNotFoundException e)
                 {
