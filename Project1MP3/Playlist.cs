@@ -558,6 +558,12 @@ namespace Project1MP3
             return max;
         }
 
+        /// <summary>
+        /// Looks for a text file to take playlist info from and fills a new playlist with it
+        /// </summary>
+        /// <param name="filePath">path where file is located</param>
+        /// <param name="playlist">user created playlist</param>
+        /// <returns>a new playlist with the data from the text file</returns>
         public Playlist FillFromFile(string filePath, Playlist playlist)
         {
 
@@ -620,6 +626,11 @@ namespace Project1MP3
             return playlist;
         }
 
+        /// <summary>
+        /// Checks for a text file to save to and writes all playlist info on it separated by a pipe character
+        /// </summary>
+        /// <param name="filePath">Path to where the file is located</param>
+        /// <param name="playlist">user created playlist</param>
         public void SaveToFile(string filePath, Playlist playlist)
         {
             StreamWriter writer = null;
