@@ -2,3 +2,4 @@ My Amazing Playlist|John Doe|01/01/2022
 Back In Time|Huey Lewis and the News|09/01/1985|4.18|Pop|1.29|BackToTheFuture.jpg|112.5
 Test song|my song|10/20/2020|1.29|Rock|1.29|image.jpg|5.5
 Test|Test|1/1/1|1|Rock|1|1|1
+Song test|song test|1/1/2009|1|Country|1.29|image|5.5

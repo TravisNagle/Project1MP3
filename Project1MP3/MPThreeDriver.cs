@@ -31,9 +31,6 @@ public class MPThreeDriver
         MPThree song = new MPThree();
         Playlist playlist = new Playlist();
 
-        playlist = playlist.FillFromFile("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
-        Console.WriteLine(playlist.PlaylistName);
-
         Console.WriteLine("Hello! Welcome to the MP3 Tracker Program! Here you can download, catalog, and play MP3 music files!");
 
         string userName;
@@ -90,11 +87,11 @@ public class MPThreeDriver
                     isValid = true;
 
                     //Checks if the user has chosen a one of the provided options
-                    if (userChoice <= 0 || userChoice > 11)
+                    if (userChoice <= 0 || userChoice > 13)
                         Console.WriteLine($"\nThat was not one of the valid options. Please try again.\n");
 
                 } 
-                while (userChoice <= 0 || userChoice > 11);
+                while (userChoice <= 0 || userChoice > 13);
             }
             catch (FormatException e)
             {
@@ -220,16 +217,8 @@ public class MPThreeDriver
                 }
                 break;
             case 11:
-                if (playlist.PlaylistName == null)
-                {
-                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
-                    Menu(username, newSong, playlist);
-                }
-                else
-                {
-                    Console.WriteLine();
-                    Menu(username, newSong, playlist);
-                }
+                playlist = LoadPlaylist("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
+                Menu(username, newSong, playlist);
                 break;
             case 12:
                 if (playlist.PlaylistName == null)
@@ -239,11 +228,12 @@ public class MPThreeDriver
                 }
                 else
                 {
+                    SavePlaylist("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
                     Menu(username, newSong, playlist);
                 }
                 break;
             case 13:
-                if(playlist.SaveNeeded = true)
+                if(playlist.SaveNeeded)
                 {
                     Console.WriteLine("Would you like to save this playlist? (Y/N)");
                     string answer = Console.ReadLine();
@@ -315,6 +305,7 @@ public class MPThreeDriver
         Console.Write($"Press \"ENTER\" to return to the main menu. ");
         Console.ReadKey();
 
+        playlist.SaveNeeded = true;
         return playlist;
     }
 
@@ -514,6 +505,7 @@ public class MPThreeDriver
         MPThree newSong = new MPThree(nameChoice, artistChoice, releaseDateChoice, playbackTimeChoice, userGenre, downloadCostChoice, imagePathChoice, fileSizeChoice);
 
         Console.WriteLine($"\nSong Created and Added!\n");
+        playlist.SaveNeeded = true;
         return newSong;
     }
 
@@ -530,6 +522,7 @@ public class MPThreeDriver
         Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
         Console.ReadKey();
 
+        playlist.SaveNeeded = true;
         return playlist;
     }
 
@@ -562,6 +555,8 @@ public class MPThreeDriver
         playlist.RemoveSong(playlist, userChoice);
         Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
         Console.ReadKey();
+
+        playlist.SaveNeeded = true;
         return playlist;
     }
 
@@ -650,6 +645,7 @@ public class MPThreeDriver
         Console.WriteLine("-------SORTED BY TITLE-------");
         playlist.SortByTitle(playlist);
 
+        playlist.SaveNeeded = true;
         return playlist;
     }
 
@@ -663,6 +659,7 @@ public class MPThreeDriver
         Console.WriteLine("-------SORTED BY RELEASE DATE-------");
         playlist.SortByDate(playlist);
 
+        playlist.SaveNeeded = true;
         return playlist;
     }
 
