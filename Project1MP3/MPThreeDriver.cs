@@ -218,8 +218,30 @@ public class MPThreeDriver
                 }
                 break;
             case 11:
-                playlist.SaveToFile("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
-                Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
+                if(playlist.SaveNeeded = true)
+                {
+                    Console.WriteLine("Would you like to save this playlist? (Y/N)");
+                    string answer = Console.ReadLine();
+
+                    if(answer == "Y" || answer == "y")
+                    {
+                        playlist.SaveToFile("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
+                        Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
+                    }
+                    else if (answer == "N" || answer == "n" || answer == "No" || answer == "no")
+                    {
+                        Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{answer} is not a valid option, please try again");
+                        Menu(username, newSong, playlist);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
+                }
                 break;
             default:
                 Console.WriteLine($"\nThat was not one of the valid options, please try again.\n");
