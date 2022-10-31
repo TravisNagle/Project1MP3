@@ -32,7 +32,7 @@ namespace Project1MP3
         public string PlaylistName { get; set; }
         private string PlaylistCreator { get; set; }
         private string CreationDate { get; set; }
-        public bool SaveNeeded { get; set; }
+        public bool SaveNeeded { get; set; } = false;
 
         /// <summary>
         /// Default constructor for the Playlist class that uses the default MPThree constructor

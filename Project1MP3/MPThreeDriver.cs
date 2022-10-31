@@ -81,8 +81,10 @@ public class MPThreeDriver
                     Console.WriteLine("7. Search by genre"); 
                     Console.WriteLine("8. Search by artist"); 
                     Console.WriteLine("9. Sort songs by title"); 
-                    Console.WriteLine("10. Sort by release date"); 
-                    Console.WriteLine("11. Exit"); 
+                    Console.WriteLine("10. Sort by release date");
+                    Console.WriteLine("11. Load playlist");
+                    Console.WriteLine("12. Save playlist");
+                    Console.WriteLine("13. Exit"); 
 
                     userChoice = int.Parse(Console.ReadLine());
                     isValid = true;
@@ -218,6 +220,29 @@ public class MPThreeDriver
                 }
                 break;
             case 11:
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Menu(username, newSong, playlist);
+                }
+                break;
+            case 12:
+                if (playlist.PlaylistName == null)
+                {
+                    Console.WriteLine($"\nThere is no playlist created, please create a playlist to add a song.\n");
+                    Menu(username, newSong, playlist);
+                }
+                else
+                {
+                    Menu(username, newSong, playlist);
+                }
+                break;
+            case 13:
                 if(playlist.SaveNeeded = true)
                 {
                     Console.WriteLine("Would you like to save this playlist? (Y/N)");
@@ -638,6 +663,38 @@ public class MPThreeDriver
         Console.WriteLine("-------SORTED BY RELEASE DATE-------");
         playlist.SortByDate(playlist);
 
+        return playlist;
+    }
+
+    public static Playlist LoadPlaylist(string filePath, Playlist playlist)
+    {
+        Console.WriteLine("-------LOADING PLAYLIST-------");
+        try
+        {
+            playlist = playlist.FillFromFile(filePath, playlist);
+        }
+        catch(FileNotFoundException e)
+        {
+            Console.Write("Save file not found");
+        }
+        return playlist;
+    }
+
+    public static Playlist SavePlaylist(string filePath, Playlist playlist)
+    {
+        Console.WriteLine("-------SAVING PLAYLIST-------");
+        try
+        {
+            playlist.SaveToFile(filePath, playlist);
+        }
+        catch(FileNotFoundException e)
+        {
+            Console.WriteLine("There is no file to save to");
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
         return playlist;
     }
 }
