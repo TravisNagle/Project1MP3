@@ -31,7 +31,8 @@ public class MPThreeDriver
         MPThree song = new MPThree();
         Playlist playlist = new Playlist();
 
-        playlist.FillFromFile("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
+        playlist = playlist.FillFromFile("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
+        Console.WriteLine(playlist.PlaylistName);
 
         Console.WriteLine("Hello! Welcome to the MP3 Tracker Program! Here you can download, catalog, and play MP3 music files!");
 

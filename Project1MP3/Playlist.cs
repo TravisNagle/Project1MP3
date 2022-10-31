@@ -41,7 +41,6 @@ namespace Project1MP3
         public Playlist()
         {
             PlaylistSongs = new List<MPThree>();
-            PlaylistSongs.Add(new MPThree());
             PlaylistName = null;
             PlaylistCreator = null;
             CreationDate = null;
@@ -559,7 +558,7 @@ namespace Project1MP3
             return max;
         }
 
-        public void FillFromFile(string filePath, Playlist playlist)
+        public Playlist FillFromFile(string filePath, Playlist playlist)
         {
 
             bool valid = false;
@@ -582,15 +581,16 @@ namespace Project1MP3
                         }
                         else
                         {
-                            string[] fields = text.Split('|');
+                            string[] fields = text.Split("|");
                             playlist = new Playlist(playlist.PlaylistSongs, fields[0], fields[1], fields[2]);
 
                             while (reader.Peek() != -1)
                             {
                                 text = reader.ReadLine();
-                                fields = text.Split('|');
+                                fields = text.Split("|");
 
-                                MPThree song = new MPThree(fields[3], fields[4], fields[5], double.Parse(fields[6]), (Genre)Enum.Parse(typeof(Genre), fields[7]), decimal.Parse(fields[8]), fields[9], double.Parse(fields[10]));
+                                MPThree song = new MPThree(fields[0], fields[1], fields[2], double.Parse(fields[3]), (Genre)Enum.Parse(typeof(Genre), fields[4]), decimal.Parse(fields[5]), fields[6], double.Parse(fields[7]));
+                                playlist.PlaylistSongs.Add(song);
                             }
                         }
                     }
@@ -606,6 +606,7 @@ namespace Project1MP3
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Console.WriteLine(e.StackTrace);
                 }
                 finally
                 {
@@ -613,6 +614,7 @@ namespace Project1MP3
                         reader.Close();
                 }
             }
+            return playlist;
         }
 
         public static void SaveToFile(string filePath)
