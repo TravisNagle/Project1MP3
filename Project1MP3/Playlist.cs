@@ -570,56 +570,54 @@ namespace Project1MP3
             bool valid = false;
             string text = "";
             StreamReader reader = null;
+            filePath = $"../../../PlaylistData/{filePath}";
 
-            while(!valid)
+            try
             {
+                reader = new StreamReader(filePath);
+                valid = true;
+
                 try
                 {
-                    reader = new StreamReader(filePath);
-                    valid = true;
-
-                    try
+                    text = reader.ReadLine();
+                    if (text == null)
                     {
-                        text = reader.ReadLine();
-                        if(text == null)
-                        {
-                            Console.WriteLine("You're save file is empty");
-                        }
-                        else
-                        {
-                            string[] fields = text.Split("|");
-                            playlist = new Playlist(playlist.PlaylistSongs, fields[0], fields[1], fields[2]);
+                        Console.WriteLine("You're save file is empty");
+                    }
+                    else
+                    {
+                        string[] fields = text.Split("|");
+                        playlist = new Playlist(playlist.PlaylistSongs, fields[0], fields[1], fields[2]);
 
-                            while (reader.Peek() != -1)
-                            {
-                                text = reader.ReadLine();
-                                fields = text.Split("|");
+                        while (reader.Peek() != -1)
+                        {
+                            text = reader.ReadLine();
+                            fields = text.Split("|");
 
-                                MPThree song = new MPThree(fields[0], fields[1], fields[2], double.Parse(fields[3]), (Genre)Enum.Parse(typeof(Genre), fields[4]), 
-                                                           decimal.Parse(fields[5]), fields[6], double.Parse(fields[7]));
-                                playlist.PlaylistSongs.Add(song);
-                            }
+                            MPThree song = new MPThree(fields[0], fields[1], fields[2], double.Parse(fields[3]), (Genre)Enum.Parse(typeof(Genre), fields[4]),
+                                                       decimal.Parse(fields[5]), fields[6], double.Parse(fields[7]));
+                            playlist.PlaylistSongs.Add(song);
                         }
                     }
-                    catch(NullReferenceException e)
-                    {
-                        Console.WriteLine("This save file is empty");
-                    }
                 }
-                catch (FileNotFoundException e)
+                catch (NullReferenceException e)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("This save file is empty");
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
             }
 
             SaveNeeded = true;
@@ -634,9 +632,10 @@ namespace Project1MP3
         public void SaveToFile(string filePath, Playlist playlist)
         {
             StreamWriter writer = null;
+            filePath = $"../../../PlaylistData/{filePath}";
             try
             {
-                writer = new StreamWriter(filePath);
+                writer = new StreamWriter(new FileStream(filePath, FileMode.Create));
                 writer.WriteLine(playlist.PlaylistName + "|" + playlist.PlaylistCreator + "|" + playlist.CreationDate);
 
                 for(int i = 0; i < playlist.PlaylistSongs.Count; i++)

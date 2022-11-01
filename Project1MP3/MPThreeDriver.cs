@@ -45,7 +45,6 @@ public class MPThreeDriver
         Console.WriteLine($"Welcome {userName}! Please enjoy MP3 Tracker.");
         //Takes user to the menu
         Menu(userName, song, playlist);
-        
     }
 
     /// <summary>
@@ -89,7 +88,6 @@ public class MPThreeDriver
                     //Checks if the user has chosen a one of the provided options
                     if (userChoice <= 0 || userChoice > 13)
                         Console.WriteLine($"\nThat was not one of the valid options. Please try again.\n");
-
                 } 
                 while (userChoice <= 0 || userChoice > 13);
             }
@@ -217,7 +215,9 @@ public class MPThreeDriver
                 }
                 break;
             case 11:
-                playlist = LoadPlaylist("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
+                Console.Write("Enter the save file name: ");
+                string fileName = Console.ReadLine();
+                playlist = LoadPlaylist(fileName, playlist);
                 Menu(username, newSong, playlist);
                 break;
             case 12:
@@ -228,7 +228,9 @@ public class MPThreeDriver
                 }
                 else
                 {
-                    SavePlaylist("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
+                    Console.Write("Enter the save file name: ");
+                    string filePath = Console.ReadLine();
+                    SavePlaylist(filePath, playlist);
                     Menu(username, newSong, playlist);
                 }
                 break;
@@ -240,7 +242,9 @@ public class MPThreeDriver
 
                     if(answer == "Y" || answer == "y")
                     {
-                        playlist.SaveToFile("../../../PlaylistSaveFolder/PlaylistSaveFile.txt", playlist);
+                        Console.Write("Enter the save file name: ");
+                        string filePath = Console.ReadLine();
+                        playlist.SaveToFile(filePath, playlist);
                         Console.WriteLine($"Thank you for using MP3 Tracker, {username}!");
                     }
                     else if (answer == "N" || answer == "n" || answer == "No" || answer == "no")
