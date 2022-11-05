@@ -137,7 +137,6 @@ namespace Project1MP3
             int max = 0;
             for(int i = 1; i < count; i++)
             {
-                int maxLength = 0;
                 string songOne = playlist.PlaylistSongs[i].SongTitle;
                 string songMax = playlist.PlaylistSongs[max].SongTitle;
 
