@@ -59,7 +59,7 @@ public class MPThreeDriver
     {
         int userChoice = -1;
         bool isValid = false;
-        while(!isValid)
+        while (!isValid)
         {
             try
             {
@@ -69,19 +69,19 @@ public class MPThreeDriver
                     Console.WriteLine("Menu for Project 3 - MP3 Tracker");
                     Console.WriteLine("------------------------");
                     Console.WriteLine();
-                    Console.WriteLine("1. Create a new playlist"); 
-                    Console.WriteLine("2. Create a new MP3"); 
-                    Console.WriteLine("3. Edit an MP3"); 
-                    Console.WriteLine("4. Remove an MP3"); 
-                    Console.WriteLine("5. Display playlist"); 
-                    Console.WriteLine("6. Search by song name"); 
-                    Console.WriteLine("7. Search by genre"); 
-                    Console.WriteLine("8. Search by artist"); 
-                    Console.WriteLine("9. Sort songs by title"); 
+                    Console.WriteLine("1. Create a new playlist");
+                    Console.WriteLine("2. Create a new MP3");
+                    Console.WriteLine("3. Edit an MP3");
+                    Console.WriteLine("4. Remove an MP3");
+                    Console.WriteLine("5. Display playlist");
+                    Console.WriteLine("6. Search by song name");
+                    Console.WriteLine("7. Search by genre");
+                    Console.WriteLine("8. Search by artist");
+                    Console.WriteLine("9. Sort songs by title");
                     Console.WriteLine("10. Sort by release date");
                     Console.WriteLine("11. Load playlist");
                     Console.WriteLine("12. Save playlist");
-                    Console.WriteLine("13. Exit"); 
+                    Console.WriteLine("13. Exit");
 
                     userChoice = int.Parse(Console.ReadLine());
                     isValid = true;
@@ -89,7 +89,7 @@ public class MPThreeDriver
                     //Checks if the user has chosen a one of the provided options
                     if (userChoice <= 0 || userChoice > 13)
                         Console.WriteLine($"\nThat was not one of the valid options. Please try again.\n");
-                } 
+                }
                 while (userChoice <= 0 || userChoice > 13);
             }
             catch (FormatException e)
@@ -236,12 +236,12 @@ public class MPThreeDriver
                 }
                 break;
             case 13:
-                if(playlist.SaveNeeded)
+                if (playlist.SaveNeeded)
                 {
                     Console.WriteLine("Would you like to save this playlist? (Y/N)");
                     string answer = Console.ReadLine();
 
-                    if(answer == "Y" || answer == "y")
+                    if (answer == "Y" || answer == "y")
                     {
                         Console.Write("Enter the save file name: ");
                         string filePath = Console.ReadLine();
@@ -344,7 +344,7 @@ public class MPThreeDriver
             int year = 0;
 
             bool isValidMonth = false;
-            while(!isValidMonth)
+            while (!isValidMonth)
             {
                 try
                 {
@@ -356,16 +356,16 @@ public class MPThreeDriver
                         isValidMonth = true;
                     }
                 }
-                catch(FormatException e)
+                catch (FormatException e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
 
-            if(month == 2)
+            if (month == 2)
             {
                 bool isValidFeb = false;
-                while(!isValidFeb)
+                while (!isValidFeb)
                 {
                     try
                     {
@@ -376,7 +376,7 @@ public class MPThreeDriver
                             isValidFeb = true;
                         }
                     }
-                    catch(FormatException e)
+                    catch (FormatException e)
                     {
                         Console.WriteLine(e.Message);
                     }
@@ -385,7 +385,7 @@ public class MPThreeDriver
             else
             {
                 bool isValidDay = false;
-                while(!isValidDay)
+                while (!isValidDay)
                 {
                     try
                     {
@@ -396,7 +396,7 @@ public class MPThreeDriver
                             isValidDay = true;
                         }
                     }
-                    catch(FormatException e)
+                    catch (FormatException e)
                     {
                         Console.WriteLine(e.Message);
                     }
@@ -404,7 +404,7 @@ public class MPThreeDriver
             }
 
             bool isValidYear = false;
-            while(!isValidYear)
+            while (!isValidYear)
             {
                 try
                 {
@@ -415,7 +415,7 @@ public class MPThreeDriver
                         isValidYear = true;
                     }
                 }
-                catch(FormatException e)
+                catch (FormatException e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -428,7 +428,7 @@ public class MPThreeDriver
         do
         {
             bool isValid = false;
-            while(!isValid)
+            while (!isValid)
             {
                 try
                 {
@@ -436,7 +436,7 @@ public class MPThreeDriver
                     playbackTimeChoice = double.Parse(Console.ReadLine());
                     isValid = true;
                 }
-                catch(FormatException e)
+                catch (FormatException e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -446,7 +446,7 @@ public class MPThreeDriver
         Genre userGenre = Genre.Other;
         string genreChoice = "";
         bool valid = false;
-        while(!valid)
+        while (!valid)
         {
             try
             {
@@ -455,7 +455,7 @@ public class MPThreeDriver
                 userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice); // Converts user's string input to enum
                 valid = true;
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine("You have chosen an invalid option, please try again.");
             }
@@ -465,7 +465,7 @@ public class MPThreeDriver
         do
         {
             bool isValid = false;
-            while(!isValid)
+            while (!isValid)
             {
                 try
                 {
@@ -473,7 +473,7 @@ public class MPThreeDriver
                     downloadCostChoice = decimal.Parse(Console.ReadLine());
                     isValid = true;
                 }
-                catch(FormatException e)
+                catch (FormatException e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -491,7 +491,7 @@ public class MPThreeDriver
         do
         {
             bool isValid = false;
-            while(!isValid)
+            while (!isValid)
             {
                 try
                 {
@@ -499,7 +499,7 @@ public class MPThreeDriver
                     fileSizeChoice = double.Parse(Console.ReadLine());
                     isValid = true;
                 }
-                catch(FormatException e)
+                catch (FormatException e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -523,7 +523,245 @@ public class MPThreeDriver
     public static Playlist EditSong(string username, Playlist playlist)
     {
         Console.WriteLine("-------EDIT SONG-------");
-        playlist = playlist.EditSong(playlist);
+
+        bool isValid = false;
+        int userChoice = -1;
+        List<MPThree> editedSongs = playlist.GetPlaylist();
+
+        while (!isValid)
+        {
+            try
+            {
+                do
+                {
+                    Console.WriteLine(playlist);
+                    Console.WriteLine("Select a song to edit: ");
+                    userChoice = int.Parse(Console.ReadLine());
+                    isValid = true;
+                }
+                while (userChoice <= 0 || userChoice > playlist.PlaylistSize(playlist));
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        int featureChoice = 0;
+        do
+        {
+            bool valid = false;
+            while (!valid)
+            {
+                try
+                {
+                    do
+                    {
+                        Console.WriteLine($"Select a feature to edit:\n1.) Song Title\n2.) Artist Name\n3.) Release Date\n4.) Playback Time\n5.) Genre\n6.) Download Cost\n7.) Image Path\n8.) File Size");
+                        featureChoice = int.Parse(Console.ReadLine());
+                        if (featureChoice <= 0 || featureChoice > 8)
+                        {
+                            Console.WriteLine($"{featureChoice} is not one of the valid selections");
+                        }
+                        valid = true;
+                    }
+                    while (featureChoice <= 0 || featureChoice > 8);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+        while (featureChoice <= 0 || featureChoice > 8);
+
+        switch (featureChoice)
+        {
+            case 1:
+                string titleChoice = "";
+                bool validTitle = false;
+                while (!validTitle)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Song Title: ");
+                            titleChoice = Console.ReadLine();
+                            validTitle = true;
+                            editedSongs[userChoice - 1].SongTitle = titleChoice;
+                        }
+                        while (titleChoice == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 2:
+                string artistChoice = "";
+                bool validArtist = false;
+                while (!validArtist)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Artist Name: ");
+                            artistChoice = Console.ReadLine();
+                            validArtist = true;
+                            editedSongs[userChoice - 1].Artist = artistChoice;
+                        }
+                        while (artistChoice == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 3:
+                string releaseDate = "";
+                bool validDate = false;
+                while (!validDate)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Release Date: ");
+                            releaseDate = Console.ReadLine();
+                            validDate = true;
+                            editedSongs[userChoice - 1].Artist = releaseDate;
+                        }
+                        while (releaseDate == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 4:
+                double playbackTime = -1;
+                bool validTime = false;
+                while (!validTime)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Playback Time: ");
+                            playbackTime = double.Parse(Console.ReadLine());
+                            validTime = true;
+                            editedSongs[userChoice - 1].PlaybackTime = playbackTime;
+                        }
+                        while (playbackTime == -1);
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 5:
+                Genre userGenre = Genre.Other;
+                string genreChoice = "";
+                bool validGenre = false;
+                while (!validGenre)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Genre: ");
+                            genreChoice = Console.ReadLine();
+                            userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice);
+                            validGenre = true;
+                            editedSongs[userChoice - 1].Genre = userGenre;
+                        }
+                        while (genreChoice == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Your input was not valid, please try again.");
+                    }
+                }
+                break;
+            case 6:
+                decimal downloadCost = -1;
+                bool validCost = false;
+                while (!validCost)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Download Cost: ");
+                            downloadCost = decimal.Parse(Console.ReadLine());
+                            validCost = true;
+                            editedSongs[userChoice - 1].DownloadCost = downloadCost;
+                        }
+                        while (downloadCost == -1);
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 7:
+                string imagePath = "";
+                bool validPath = false;
+                while (!validPath)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Image Path: ");
+                            imagePath = Console.ReadLine();
+                            validPath = true;
+                            editedSongs[userChoice - 1].ImagePath = imagePath;
+                        }
+                        while (imagePath == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 8:
+                double fileSize = -1;
+                bool validFile = false;
+                while (!validFile)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("File Size: ");
+                            fileSize = double.Parse(Console.ReadLine());
+                            validFile = true;
+                            editedSongs[userChoice - 1].FileSize = fileSize;
+                        }
+                        while (fileSize == -1);
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+        }
+
+        Console.WriteLine(editedSongs[userChoice - 1]);
         Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
         Console.ReadKey();
 
@@ -544,7 +782,7 @@ public class MPThreeDriver
         int userChoice = 0;
 
         bool isValid = false;
-        while(!isValid)
+        while (!isValid)
         {
             try
             {
@@ -552,7 +790,7 @@ public class MPThreeDriver
                 userChoice = int.Parse(Console.ReadLine());
                 isValid = true;
             }
-        catch (FormatException e)
+            catch (FormatException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -606,7 +844,7 @@ public class MPThreeDriver
             }
         }
 
-        if(searchedPlaylist.Count == 0)
+        if (searchedPlaylist.Count == 0)
             Console.WriteLine($"No song was found named {searchedSongName}\n");
 
         for (int i = 0; i < searchedPlaylist.Count; i++)
@@ -656,7 +894,7 @@ public class MPThreeDriver
             }
         }
 
-        if(searchedPlaylist.Count == 0)
+        if (searchedPlaylist.Count == 0)
             Console.WriteLine($"No song was found under {userGenre}\n");
 
         for (int i = 0; i < searchedPlaylist.Count; i++)
@@ -691,7 +929,7 @@ public class MPThreeDriver
             }
         }
 
-        if(searchedPlaylist.Count == 0)
+        if (searchedPlaylist.Count == 0)
             Console.WriteLine($"No song was found by {searchedArtistName}\n");
 
         for (int i = 0; i < searchedPlaylist.Count; i++)
@@ -742,7 +980,7 @@ public class MPThreeDriver
         Console.WriteLine("-------LOADING PLAYLIST-------");
         playlist = playlist.FillFromFile(filePath, playlist);
 
-        if(playlist.PlaylistName != null)
+        if (playlist.PlaylistName != null)
             Console.WriteLine(playlist);
 
         return playlist;
@@ -761,11 +999,11 @@ public class MPThreeDriver
         {
             playlist.SaveToFile(filePath, playlist);
         }
-        catch(FileNotFoundException e)
+        catch (FileNotFoundException e)
         {
             Console.WriteLine("There is no file to save to");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }
