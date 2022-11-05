@@ -13,6 +13,7 @@
 //////////
 
 using System.Linq.Expressions;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using Project1MP3;
 
@@ -522,7 +523,245 @@ public class MPThreeDriver
     public static Playlist EditSong(string username, Playlist playlist)
     {
         Console.WriteLine("-------EDIT SONG-------");
-        playlist = playlist.EditSong(playlist);
+
+        bool isValid = false;
+        int userChoice = -1;
+        List<MPThree> editedSongs = playlist.GetPlaylist();
+
+        while (!isValid)
+        {
+            try
+            {
+                do
+                {
+                    Console.WriteLine(playlist);
+                    Console.WriteLine("Select a song to edit: ");
+                    userChoice = int.Parse(Console.ReadLine());
+                    isValid = true;
+                }
+                while (userChoice <= 0 || userChoice > playlist.PlaylistSize(playlist));
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        int featureChoice = 0;
+        do
+        {
+            bool valid = false;
+            while (!valid)
+            {
+                try
+                {
+                    do
+                    {
+                        Console.WriteLine($"Select a feature to edit:\n1.) Song Title\n2.) Artist Name\n3.) Release Date\n4.) Playback Time\n5.) Genre\n6.) Download Cost\n7.) Image Path\n8.) File Size");
+                        featureChoice = int.Parse(Console.ReadLine());
+                        if (featureChoice <= 0 || featureChoice > 8)
+                        {
+                            Console.WriteLine($"{featureChoice} is not one of the valid selections");
+                        }
+                        valid = true;
+                    }
+                    while (featureChoice <= 0 || featureChoice > 8);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+        while (featureChoice <= 0 || featureChoice > 8);
+
+        switch (featureChoice)
+        {
+            case 1:
+                string titleChoice = "";
+                bool validTitle = false;
+                while (!validTitle)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Song Title: ");
+                            titleChoice = Console.ReadLine();
+                            validTitle = true;
+                            editedSongs[userChoice - 1].SongTitle = titleChoice;
+                        }
+                        while (titleChoice == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 2:
+                string artistChoice = "";
+                bool validArtist = false;
+                while (!validArtist)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Artist Name: ");
+                            artistChoice = Console.ReadLine();
+                            validArtist = true;
+                            editedSongs[userChoice - 1].Artist = artistChoice;
+                        }
+                        while (artistChoice == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 3:
+                string releaseDate = "";
+                bool validDate = false;
+                while (!validDate)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Release Date: ");
+                            releaseDate = Console.ReadLine();
+                            validDate = true;
+                            editedSongs[userChoice - 1].Artist = releaseDate;
+                        }
+                        while (releaseDate == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 4:
+                double playbackTime = -1;
+                bool validTime = false;
+                while (!validTime)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Playback Time: ");
+                            playbackTime = double.Parse(Console.ReadLine());
+                            validTime = true;
+                            editedSongs[userChoice - 1].PlaybackTime = playbackTime;
+                        }
+                        while (playbackTime == -1);
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 5:
+                Genre userGenre = Genre.Other;
+                string genreChoice = "";
+                bool validGenre = false;
+                while (!validGenre)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Genre: ");
+                            genreChoice = Console.ReadLine();
+                            userGenre = (Genre)Enum.Parse(typeof(Genre), genreChoice);
+                            validGenre = true;
+                            editedSongs[userChoice - 1].Genre = userGenre;
+                        }
+                        while (genreChoice == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Your input was not valid, please try again.");
+                    }
+                }
+                break;
+            case 6:
+                decimal downloadCost = -1;
+                bool validCost = false;
+                while (!validCost)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Download Cost: ");
+                            downloadCost = decimal.Parse(Console.ReadLine());
+                            validCost = true;
+                            editedSongs[userChoice - 1].DownloadCost = downloadCost;
+                        }
+                        while (downloadCost == -1);
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 7:
+                string imagePath = "";
+                bool validPath = false;
+                while (!validPath)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("Image Path: ");
+                            imagePath = Console.ReadLine();
+                            validPath = true;
+                            editedSongs[userChoice - 1].ImagePath = imagePath;
+                        }
+                        while (imagePath == "");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+            case 8:
+                double fileSize = -1;
+                bool validFile = false;
+                while (!validFile)
+                {
+                    try
+                    {
+                        do
+                        {
+                            Console.Write("File Size: ");
+                            fileSize = double.Parse(Console.ReadLine());
+                            validFile = true;
+                            editedSongs[userChoice - 1].FileSize = fileSize;
+                        }
+                        while (fileSize == -1);
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                break;
+        }
+
+        Console.WriteLine(editedSongs[userChoice - 1]);
         Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
         Console.ReadKey();
 
@@ -556,7 +795,10 @@ public class MPThreeDriver
                 Console.WriteLine(e.Message);
             }
         }
-        playlist.RemoveSong(playlist, userChoice);
+        playlist.GetPlaylist().RemoveAt(userChoice - 1);
+        Console.WriteLine($"Song {userChoice} has been removed");
+        Console.WriteLine(playlist);
+
         Console.WriteLine($"Press \"ENTER\" to return to the main menu.");
         Console.ReadKey();
 
@@ -590,7 +832,26 @@ public class MPThreeDriver
         Console.Write("Enter the song you are looking for: ");
         searchedSongName = Console.ReadLine();
 
-        playlist.SearchSongName(playlist, searchedSongName);
+        List<MPThree> searchedPlaylist = new List<MPThree>();
+
+        Console.WriteLine("-------SONGS FOUND-------");
+        Console.WriteLine();
+        for (int i = 0; i < playlist.GetPlaylist().Count; i++)
+        {
+            if (playlist.GetPlaylist()[i].SongTitle == searchedSongName)
+            {
+                searchedPlaylist.Add(playlist.GetPlaylist()[i]);
+            }
+        }
+
+        if(searchedPlaylist.Count == 0)
+            Console.WriteLine($"No song was found named {searchedSongName}\n");
+
+        for (int i = 0; i < searchedPlaylist.Count; i++)
+        {
+            Console.WriteLine(searchedPlaylist[i]);
+            Console.WriteLine();
+        }
     }
 
     /// <summary>
@@ -620,7 +881,27 @@ public class MPThreeDriver
                 Console.WriteLine("You have chosen an invalid option, please try again.");
             }
         }
-        playlist.SearchGenre(playlist, userGenre);
+
+        List<MPThree> searchedPlaylist = new List<MPThree>();
+
+        Console.WriteLine("-------SONGS FOUND-------");
+        Console.WriteLine();
+        for (int i = 0; i < playlist.GetPlaylist().Count; i++)
+        {
+            if (playlist.GetPlaylist()[i].Genre == userGenre)
+            {
+                searchedPlaylist.Add(playlist.GetPlaylist()[i]);
+            }
+        }
+
+        if(searchedPlaylist.Count == 0)
+            Console.WriteLine($"No song was found under {userGenre}\n");
+
+        for (int i = 0; i < searchedPlaylist.Count; i++)
+        {
+            Console.WriteLine(searchedPlaylist[i]);
+            Console.WriteLine();
+        }
     }
 
     /// <summary>
@@ -636,7 +917,26 @@ public class MPThreeDriver
         Console.Write("Enter the artist you are looking for: ");
         searchedArtistName = Console.ReadLine();
 
-        playlist.SearchArtistName(playlist, searchedArtistName);
+        List<MPThree> searchedPlaylist = new List<MPThree>();
+
+        Console.WriteLine("-------SONGS FOUND-------");
+        Console.WriteLine();
+        for (int i = 0; i < playlist.GetPlaylist().Count; i++)
+        {
+            if (playlist.GetPlaylist()[i].Artist == searchedArtistName)
+            {
+                searchedPlaylist.Add(playlist.GetPlaylist()[i]);
+            }
+        }
+
+        if(searchedPlaylist.Count == 0)
+            Console.WriteLine($"No song was found by {searchedArtistName}\n");
+
+        for (int i = 0; i < searchedPlaylist.Count; i++)
+        {
+            Console.WriteLine(searchedPlaylist[i]);
+            Console.WriteLine();
+        }
     }
 
     /// <summary>
@@ -648,6 +948,7 @@ public class MPThreeDriver
     {
         Console.WriteLine("-------SORTED BY TITLE-------");
         playlist.SortByTitle(playlist);
+        Console.WriteLine(playlist);
 
         playlist.SaveNeeded = true;
         return playlist;
@@ -662,6 +963,7 @@ public class MPThreeDriver
     {
         Console.WriteLine("-------SORTED BY RELEASE DATE-------");
         playlist.SortByDate(playlist);
+        Console.WriteLine(playlist);
 
         playlist.SaveNeeded = true;
         return playlist;
@@ -676,14 +978,11 @@ public class MPThreeDriver
     public static Playlist LoadPlaylist(string filePath, Playlist playlist)
     {
         Console.WriteLine("-------LOADING PLAYLIST-------");
-        try
-        {
-            playlist = playlist.FillFromFile(filePath, playlist);
-        }
-        catch(FileNotFoundException e)
-        {
-            Console.Write("Save file not found");
-        }
+        playlist = playlist.FillFromFile(filePath, playlist);
+
+        if(playlist.PlaylistName != null)
+            Console.WriteLine(playlist);
+
         return playlist;
     }
 
